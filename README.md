@@ -31,7 +31,7 @@ Or with a refresh token:
 SPOTIFY_CLIENT_ID=... SPOTIFY_CLIENT_SECRET=... SPOTIFY_REFRESH_TOKEN=... npm run sync:spotify
 ```
 
-This overwrites `src/data/public-stats.json`. Commit + redeploy to update the public site.
+This overwrites `src/data/public-stats.json` and `src/data/public-stats.ts`. Commit + redeploy to update the public site.
 
 ## Why a snapshot?
 
