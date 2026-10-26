@@ -1,10 +1,10 @@
-import publicStats from "@/data/public-stats.json";
+import { publicStats } from "@/data/public-stats";
 import type { StatsRange } from "./load-stats";
 
 type Artist = {
   id: string;
   name: string;
-  images?: { url: string }[];
+  images?: { url: string; height?: number | null; width?: number | null }[];
   external_urls?: { spotify: string };
   genres?: string[];
   popularity?: number;
@@ -17,21 +17,28 @@ type Track = {
   explicit?: boolean;
   popularity?: number;
   artists: { name: string }[];
-  album?: { name: string; images?: { url: string }[]; release_date?: string };
+  album?: {
+    name: string;
+    images?: { url: string; height?: number | null; width?: number | null }[];
+    release_date?: string;
+  };
   external_urls?: { spotify: string };
 };
 
-const snap = publicStats as {
+type Snapshot = {
   fetchedAt: string;
   profile: {
+    id?: string;
     display_name: string;
-    images: { url: string; height?: number; width?: number }[];
+    images: { url: string; height?: number | null; width?: number | null }[];
   };
   short_term: { artists: Artist[]; tracks: Track[] };
   medium_term: { artists: Artist[]; tracks: Track[] };
   long_term: { artists: Artist[]; tracks: Track[] };
   recent: unknown[];
 };
+
+const snap = publicStats as unknown as Snapshot;
 
 export function getSnapshotMeta() {
   return {
@@ -41,7 +48,11 @@ export function getSnapshotMeta() {
 }
 
 export function getRangeBundle(range: StatsRange) {
-  return snap[range];
+  const bucket = snap[range];
+  return {
+    artists: bucket?.artists ?? [],
+    tracks: bucket?.tracks ?? [],
+  };
 }
 
 /** Affinity score from list rank (1st = 10 … 10th = 1). */

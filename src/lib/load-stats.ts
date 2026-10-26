@@ -1,4 +1,4 @@
-import publicStats from "@/data/public-stats.json";
+import { publicStats } from "@/data/public-stats";
 import { demoArtists, demoProfile, demoRecent, demoTracks } from "./demo-data";
 import { getSession, setSession } from "./session";
 import {

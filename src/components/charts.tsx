@@ -13,9 +13,9 @@ import {
   YAxis,
 } from "recharts";
 
-const INK = "#0a0a0a";
+const INK = "#1d1d1f";
 const MUTED = "#86868b";
-const GRID = "rgba(0,0,0,0.05)";
+const GRID = "rgba(0,0,0,0.06)";
 const BLUE = "#0071e3";
 const FILL = "#1d1d1f";
 
@@ -40,8 +40,8 @@ function Tip({
       className="rounded-2xl px-3.5 py-2.5 text-[12px] text-white"
       style={{
         background: "rgba(29,29,31,0.92)",
-        backdropFilter: "blur(12px)",
-        boxShadow: "0 12px 40px rgba(0,0,0,0.18)",
+        backdropFilter: "blur(16px)",
+        boxShadow: "0 16px 48px rgba(0,0,0,0.2)",
       }}
     >
       <p className="font-medium tracking-[-0.01em]">{full}</p>
@@ -57,6 +57,9 @@ export function AffinityBarChart({
 }: {
   data: { name: string; fullName: string; affinity: number; rank: number }[];
 }) {
+  if (!data.length) {
+    return <EmptyChart />;
+  }
   return (
     <div className="h-[320px] w-full">
       <ResponsiveContainer width="100%" height="100%">
@@ -87,7 +90,7 @@ export function AffinityBarChart({
               <Cell
                 key={i}
                 fill={i === 0 ? BLUE : FILL}
-                fillOpacity={i === 0 ? 1 : 1 - i * 0.07}
+                fillOpacity={i === 0 ? 1 : Math.max(0.35, 1 - i * 0.07)}
               />
             ))}
           </Bar>
@@ -102,6 +105,9 @@ export function DurationBarChart({
 }: {
   data: { name: string; fullName: string; minutes: number; rank: number }[];
 }) {
+  if (!data.length) {
+    return <EmptyChart />;
+  }
   return (
     <div className="h-[320px] w-full">
       <ResponsiveContainer width="100%" height="100%">
@@ -148,6 +154,9 @@ export function StickyArtistsChart({
   }[];
 }) {
   const top = data.slice(0, 8);
+  if (!top.length) {
+    return <EmptyChart />;
+  }
   return (
     <div className="h-[320px] w-full">
       <ResponsiveContainer width="100%" height="100%">
@@ -182,7 +191,7 @@ export function StickyArtistsChart({
                   className="rounded-2xl px-3.5 py-2.5 text-[12px] text-white"
                   style={{
                     background: "rgba(29,29,31,0.92)",
-                    backdropFilter: "blur(12px)",
+                    backdropFilter: "blur(16px)",
                   }}
                 >
                   <p className="font-medium">{p.fullName}</p>
@@ -213,11 +222,7 @@ export function ExplicitPie({
 }) {
   const colors = [INK, BLUE];
   if (!data.length) {
-    return (
-      <p className="flex h-[320px] items-center justify-center text-sm text-tertiary">
-        No mix data
-      </p>
-    );
+    return <EmptyChart label="No mix data" />;
   }
   const total = data.reduce((s, d) => s + d.value, 0);
   return (
@@ -230,8 +235,8 @@ export function ExplicitPie({
             nameKey="name"
             innerRadius={74}
             outerRadius={104}
-            paddingAngle={2}
-            stroke="#fbfbfd"
+            paddingAngle={3}
+            stroke="#ffffff"
             strokeWidth={4}
           >
             {data.map((_, i) => (
@@ -264,5 +269,13 @@ export function ExplicitPie({
         </div>
       </div>
     </div>
+  );
+}
+
+function EmptyChart({ label = "No data" }: { label?: string }) {
+  return (
+    <p className="flex h-[320px] items-center justify-center text-sm text-tertiary">
+      {label}
+    </p>
   );
 }

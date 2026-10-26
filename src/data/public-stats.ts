@@ -1,0 +1,1321 @@
+/* Auto-generated listening snapshot — do not edit by hand */
+export const publicStats = {
+  "fetchedAt": "2026-10-26T03:59:01.607112Z",
+  "profile": {
+    "id": "dj.cee10",
+    "display_name": "dereck",
+    "images": [
+      {
+        "height": 300,
+        "url": "https://i.scdn.co/image/ab6775700000ee8591822a2bee18544e7fb0c974",
+        "width": 300
+      }
+    ]
+  },
+  "short_term": {
+    "artists": [
+      {
+        "id": "6nB0iY1cjSY1KyhYyuIIKH",
+        "name": "FKA twigs",
+        "images": [
+          {
+            "url": "https://i.scdn.co/image/ab6761610000e5eb3f6b8973be0344896d8680ab",
+            "height": 640,
+            "width": 640
+          }
+        ],
+        "external_urls": {
+          "spotify": "https://open.spotify.com/artist/6nB0iY1cjSY1KyhYyuIIKH"
+        },
+        "genres": [],
+        "popularity": 0
+      },
+      {
+        "id": "25uiPmTg16RbhZWAqwLBy5",
+        "name": "Charli xcx",
+        "images": [
+          {
+            "url": "https://i.scdn.co/image/ab6761610000e5eb6fa76436a2bba83b9f1d6fd1",
+            "height": 640,
+            "width": 640
+          }
+        ],
+        "external_urls": {
+          "spotify": "https://open.spotify.com/artist/25uiPmTg16RbhZWAqwLBy5"
+        },
+        "genres": [],
+        "popularity": 0
+      },
+      {
+        "id": "6LEeAFiJF8OuPx747e1wxR",
+        "name": "Blood Orange",
+        "images": [
+          {
+            "url": "https://i.scdn.co/image/ab6761610000e5eb82a833d61eafc09c05c24882",
+            "height": 640,
+            "width": 640
+          }
+        ],
+        "external_urls": {
+          "spotify": "https://open.spotify.com/artist/6LEeAFiJF8OuPx747e1wxR"
+        },
+        "genres": [],
+        "popularity": 0
+      },
+      {
+        "id": "78rUTD7y6Cy67W1RVzYs7t",
+        "name": "PinkPantheress",
+        "images": [
+          {
+            "url": "https://i.scdn.co/image/ab6761610000e5eb6bf10d74063b45938f5d8656",
+            "height": 640,
+            "width": 640
+          }
+        ],
+        "external_urls": {
+          "spotify": "https://open.spotify.com/artist/78rUTD7y6Cy67W1RVzYs7t"
+        },
+        "genres": [],
+        "popularity": 0
+      },
+      {
+        "id": "6M2wZ9GZgrQXHCFfjv46we",
+        "name": "Dua Lipa",
+        "images": [
+          {
+            "url": "https://i.scdn.co/image/ab6761610000e5eb0c68f6c95232e716f0abee8d",
+            "height": 640,
+            "width": 640
+          }
+        ],
+        "external_urls": {
+          "spotify": "https://open.spotify.com/artist/6M2wZ9GZgrQXHCFfjv46we"
+        },
+        "genres": [],
+        "popularity": 0
+      },
+      {
+        "id": "4qwGe91Bz9K2T8jXTZ815W",
+        "name": "Janet Jackson",
+        "images": [
+          {
+            "url": "https://i.scdn.co/image/ab6761610000e5ebb3807fadacba2e4c29a3cce3",
+            "height": 640,
+            "width": 640
+          }
+        ],
+        "external_urls": {
+          "spotify": "https://open.spotify.com/artist/4qwGe91Bz9K2T8jXTZ815W"
+        },
+        "genres": [],
+        "popularity": 0
+      },
+      {
+        "id": "3M3wTTCDwicRubwMyHyEDy",
+        "name": "Shygirl",
+        "images": [
+          {
+            "url": "https://i.scdn.co/image/ab6761610000e5eb9b343c5050b7c6bb732917e6",
+            "height": 640,
+            "width": 640
+          }
+        ],
+        "external_urls": {
+          "spotify": "https://open.spotify.com/artist/3M3wTTCDwicRubwMyHyEDy"
+        },
+        "genres": [],
+        "popularity": 0
+      },
+      {
+        "id": "6nS5roXSAGhTGr34W6n7Et",
+        "name": "Disclosure",
+        "images": [
+          {
+            "url": "https://i.scdn.co/image/ab6761610000e5eb0b084ede947f009beade9a6a",
+            "height": 640,
+            "width": 640
+          }
+        ],
+        "external_urls": {
+          "spotify": "https://open.spotify.com/artist/6nS5roXSAGhTGr34W6n7Et"
+        },
+        "genres": [],
+        "popularity": 0
+      },
+      {
+        "id": "2sSGPbdZJkaSE2AbcGOACx",
+        "name": "The Marías",
+        "images": [
+          {
+            "url": "https://i.scdn.co/image/ab6761610000e5ebaf586afa2b397f1288683a76",
+            "height": 640,
+            "width": 640
+          }
+        ],
+        "external_urls": {
+          "spotify": "https://open.spotify.com/artist/2sSGPbdZJkaSE2AbcGOACx"
+        },
+        "genres": [],
+        "popularity": 0
+      },
+      {
+        "id": "39hfuTf4PHfnHgIl0QBDGL",
+        "name": "AKRIILA",
+        "images": [
+          {
+            "url": "https://i.scdn.co/image/ab6761610000e5ebbd8bc141bc8afa6f086346a5",
+            "height": 640,
+            "width": 640
+          }
+        ],
+        "external_urls": {
+          "spotify": "https://open.spotify.com/artist/39hfuTf4PHfnHgIl0QBDGL"
+        },
+        "genres": [],
+        "popularity": 0
+      }
+    ],
+    "tracks": [
+      {
+        "id": "6TeKbncyK62smlAvPy1dNa",
+        "name": "Eusexua",
+        "duration_ms": 263693,
+        "explicit": false,
+        "popularity": 0,
+        "artists": [
+          {
+            "name": "FKA twigs"
+          }
+        ],
+        "album": {
+          "name": "EUSEXUA",
+          "images": [
+            {
+              "url": "https://i.scdn.co/image/ab67616d0000b2731ea443f7a8512680563ce75d",
+              "height": 640,
+              "width": 640
+            }
+          ],
+          "release_date": "2025-01-24"
+        },
+        "external_urls": {
+          "spotify": "https://open.spotify.com/track/6TeKbncyK62smlAvPy1dNa"
+        }
+      },
+      {
+        "id": "21C6u4k9di4S7w4JsQS1k7",
+        "name": "On Your Mind (feat. Lil Yachty)",
+        "duration_ms": 217960,
+        "explicit": false,
+        "popularity": 0,
+        "artists": [
+          {
+            "name": "FKA twigs"
+          },
+          {
+            "name": "Lil Yachty"
+          }
+        ],
+        "album": {
+          "name": "On Your Mind (feat. Lil Yachty)",
+          "images": [
+            {
+              "url": "https://i.scdn.co/image/ab67616d0000b27336698027f85abc9007ca544b",
+              "height": 640,
+              "width": 640
+            }
+          ],
+          "release_date": "2026-06-19"
+        },
+        "external_urls": {
+          "spotify": "https://open.spotify.com/track/21C6u4k9di4S7w4JsQS1k7"
+        }
+      },
+      {
+        "id": "1KFVosfWWb6oic6sTx6Lxo",
+        "name": "Rock Music",
+        "duration_ms": 115106,
+        "explicit": false,
+        "popularity": 0,
+        "artists": [
+          {
+            "name": "Charli xcx"
+          }
+        ],
+        "album": {
+          "name": "Music, Fashion, Film",
+          "images": [
+            {
+              "url": "https://i.scdn.co/image/ab67616d0000b273238e2ff91714a8db91b8a64d",
+              "height": 640,
+              "width": 640
+            }
+          ],
+          "release_date": "2026-07-24"
+        },
+        "external_urls": {
+          "spotify": "https://open.spotify.com/track/1KFVosfWWb6oic6sTx6Lxo"
+        }
+      },
+      {
+        "id": "6sDUNBiHIMYI5dC6TeGQNs",
+        "name": "epitafio",
+        "duration_ms": 208672,
+        "explicit": true,
+        "popularity": 0,
+        "artists": [
+          {
+            "name": "AKRIILA"
+          },
+          {
+            "name": "FaceBrooklyn"
+          },
+          {
+            "name": "Juicy BAE"
+          }
+        ],
+        "album": {
+          "name": "epistolares",
+          "images": [
+            {
+              "url": "https://i.scdn.co/image/ab67616d0000b273d651a27f17116bfb6744e848",
+              "height": 640,
+              "width": 640
+            }
+          ],
+          "release_date": "2024-08-22"
+        },
+        "external_urls": {
+          "spotify": "https://open.spotify.com/track/6sDUNBiHIMYI5dC6TeGQNs"
+        }
+      },
+      {
+        "id": "1I6c6xzdqmE9aOHibWCZOX",
+        "name": "Hot Girl (Bodies Bodies Bodies)",
+        "duration_ms": 157078,
+        "explicit": true,
+        "popularity": 0,
+        "artists": [
+          {
+            "name": "Charli xcx"
+          }
+        ],
+        "album": {
+          "name": "Hot Girl (Bodies Bodies Bodies)",
+          "images": [
+            {
+              "url": "https://i.scdn.co/image/ab67616d0000b273b4bc7d7262287578dca43f31",
+              "height": 640,
+              "width": 640
+            }
+          ],
+          "release_date": "2022-07-27"
+        },
+        "external_urls": {
+          "spotify": "https://open.spotify.com/track/1I6c6xzdqmE9aOHibWCZOX"
+        }
+      },
+      {
+        "id": "0r9zDhg2I2jvpfRC9NpsxE",
+        "name": "Touch Heaven",
+        "duration_ms": 164930,
+        "explicit": false,
+        "popularity": 0,
+        "artists": [
+          {
+            "name": "Jake Hogan"
+          }
+        ],
+        "album": {
+          "name": "Touch Heaven",
+          "images": [
+            {
+              "url": "https://i.scdn.co/image/ab67616d0000b273461f0ddf4fd966535cdd4eb1",
+              "height": 640,
+              "width": 640
+            }
+          ],
+          "release_date": "2026-07-10"
+        },
+        "external_urls": {
+          "spotify": "https://open.spotify.com/track/0r9zDhg2I2jvpfRC9NpsxE"
+        }
+      },
+      {
+        "id": "09VMgxIhiWqEyI9JQQIr55",
+        "name": "Melatonin",
+        "duration_ms": 222178,
+        "explicit": true,
+        "popularity": 0,
+        "artists": [
+          {
+            "name": "Tinashe"
+          }
+        ],
+        "album": {
+          "name": "Popstar",
+          "images": [
+            {
+              "url": "https://i.scdn.co/image/ab67616d0000b273f8dc54881b35310061266cdf",
+              "height": 640,
+              "width": 640
+            }
+          ],
+          "release_date": "2026-09-25"
+        },
+        "external_urls": {
+          "spotify": "https://open.spotify.com/track/09VMgxIhiWqEyI9JQQIr55"
+        }
+      },
+      {
+        "id": "5X8kkUaUlAyAUr9TYqDFTH",
+        "name": "All For You",
+        "duration_ms": 329933,
+        "explicit": false,
+        "popularity": 0,
+        "artists": [
+          {
+            "name": "Janet Jackson"
+          }
+        ],
+        "album": {
+          "name": "All For You",
+          "images": [
+            {
+              "url": "https://i.scdn.co/image/ab67616d0000b27312da16fd0dec009d45f7dca3",
+              "height": 640,
+              "width": 640
+            }
+          ],
+          "release_date": "2001-01-01"
+        },
+        "external_urls": {
+          "spotify": "https://open.spotify.com/track/5X8kkUaUlAyAUr9TYqDFTH"
+        }
+      },
+      {
+        "id": "0nsIevK1SeDfZzDOi6Si75",
+        "name": "Crush",
+        "duration_ms": 204317,
+        "explicit": true,
+        "popularity": 0,
+        "artists": [
+          {
+            "name": "Ethel Cain"
+          }
+        ],
+        "album": {
+          "name": "Inbred",
+          "images": [
+            {
+              "url": "https://i.scdn.co/image/ab67616d0000b273f044eadcf908a0e9649512db",
+              "height": 640,
+              "width": 640
+            }
+          ],
+          "release_date": "2021-04-23"
+        },
+        "external_urls": {
+          "spotify": "https://open.spotify.com/track/0nsIevK1SeDfZzDOi6Si75"
+        }
+      },
+      {
+        "id": "59fZ1smcmciapt7NB00t96",
+        "name": "Anna Wintour",
+        "duration_ms": 273908,
+        "explicit": true,
+        "popularity": 0,
+        "artists": [
+          {
+            "name": "Azealia Banks"
+          }
+        ],
+        "album": {
+          "name": "Anna Wintour",
+          "images": [
+            {
+              "url": "https://i.scdn.co/image/ab67616d0000b2730fcd35833b93d2e61e6e78d9",
+              "height": 640,
+              "width": 640
+            }
+          ],
+          "release_date": "2018-04-06"
+        },
+        "external_urls": {
+          "spotify": "https://open.spotify.com/track/59fZ1smcmciapt7NB00t96"
+        }
+      }
+    ]
+  },
+  "medium_term": {
+    "artists": [
+      {
+        "id": "25uiPmTg16RbhZWAqwLBy5",
+        "name": "Charli xcx",
+        "images": [
+          {
+            "url": "https://i.scdn.co/image/ab6761610000e5eb6fa76436a2bba83b9f1d6fd1",
+            "height": 640,
+            "width": 640
+          }
+        ],
+        "external_urls": {
+          "spotify": "https://open.spotify.com/artist/25uiPmTg16RbhZWAqwLBy5"
+        },
+        "genres": [],
+        "popularity": 0
+      },
+      {
+        "id": "6nB0iY1cjSY1KyhYyuIIKH",
+        "name": "FKA twigs",
+        "images": [
+          {
+            "url": "https://i.scdn.co/image/ab6761610000e5eb3f6b8973be0344896d8680ab",
+            "height": 640,
+            "width": 640
+          }
+        ],
+        "external_urls": {
+          "spotify": "https://open.spotify.com/artist/6nB0iY1cjSY1KyhYyuIIKH"
+        },
+        "genres": [],
+        "popularity": 0
+      },
+      {
+        "id": "0qc4BFxcwRFZfevTck4fOi",
+        "name": "fakemink",
+        "images": [
+          {
+            "url": "https://i.scdn.co/image/ab6761610000e5ebfea7ad1b3bc4a7f94234bd1c",
+            "height": 640,
+            "width": 640
+          }
+        ],
+        "external_urls": {
+          "spotify": "https://open.spotify.com/artist/0qc4BFxcwRFZfevTck4fOi"
+        },
+        "genres": [],
+        "popularity": 0
+      },
+      {
+        "id": "6LEeAFiJF8OuPx747e1wxR",
+        "name": "Blood Orange",
+        "images": [
+          {
+            "url": "https://i.scdn.co/image/ab6761610000e5eb82a833d61eafc09c05c24882",
+            "height": 640,
+            "width": 640
+          }
+        ],
+        "external_urls": {
+          "spotify": "https://open.spotify.com/artist/6LEeAFiJF8OuPx747e1wxR"
+        },
+        "genres": [],
+        "popularity": 0
+      },
+      {
+        "id": "5DslL3PUa3BcRlCCEP64A4",
+        "name": "The Hellp",
+        "images": [
+          {
+            "url": "https://i.scdn.co/image/ab6761610000e5eb5572476dc5c91ba99394fba3",
+            "height": 640,
+            "width": 640
+          }
+        ],
+        "external_urls": {
+          "spotify": "https://open.spotify.com/artist/5DslL3PUa3BcRlCCEP64A4"
+        },
+        "genres": [],
+        "popularity": 0
+      },
+      {
+        "id": "78rUTD7y6Cy67W1RVzYs7t",
+        "name": "PinkPantheress",
+        "images": [
+          {
+            "url": "https://i.scdn.co/image/ab6761610000e5eb6bf10d74063b45938f5d8656",
+            "height": 640,
+            "width": 640
+          }
+        ],
+        "external_urls": {
+          "spotify": "https://open.spotify.com/artist/78rUTD7y6Cy67W1RVzYs7t"
+        },
+        "genres": [],
+        "popularity": 0
+      },
+      {
+        "id": "66CXWjxzNUsdJxJ2JdwvnR",
+        "name": "Ariana Grande",
+        "images": [
+          {
+            "url": "https://i.scdn.co/image/ab6761610000e5eb68412f2d0177a9ebc265ff58",
+            "height": 640,
+            "width": 640
+          }
+        ],
+        "external_urls": {
+          "spotify": "https://open.spotify.com/artist/66CXWjxzNUsdJxJ2JdwvnR"
+        },
+        "genres": [],
+        "popularity": 0
+      },
+      {
+        "id": "6nS5roXSAGhTGr34W6n7Et",
+        "name": "Disclosure",
+        "images": [
+          {
+            "url": "https://i.scdn.co/image/ab6761610000e5eb0b084ede947f009beade9a6a",
+            "height": 640,
+            "width": 640
+          }
+        ],
+        "external_urls": {
+          "spotify": "https://open.spotify.com/artist/6nS5roXSAGhTGr34W6n7Et"
+        },
+        "genres": [],
+        "popularity": 0
+      },
+      {
+        "id": "5XPJP6zfXVlPJtO4QSsSmQ",
+        "name": "Chase Icon",
+        "images": [
+          {
+            "url": "https://i.scdn.co/image/ab6761610000e5eb216142bab4334bd63a61ab6e",
+            "height": 640,
+            "width": 640
+          }
+        ],
+        "external_urls": {
+          "spotify": "https://open.spotify.com/artist/5XPJP6zfXVlPJtO4QSsSmQ"
+        },
+        "genres": [],
+        "popularity": 0
+      },
+      {
+        "id": "6vWDO969PvNqNYHIOW5v0m",
+        "name": "Beyoncé",
+        "images": [
+          {
+            "url": "https://i.scdn.co/image/ab6761610000e5eb7eaa373538359164b843f7c0",
+            "height": 640,
+            "width": 640
+          }
+        ],
+        "external_urls": {
+          "spotify": "https://open.spotify.com/artist/6vWDO969PvNqNYHIOW5v0m"
+        },
+        "genres": [],
+        "popularity": 0
+      }
+    ],
+    "tracks": [
+      {
+        "id": "1KFVosfWWb6oic6sTx6Lxo",
+        "name": "Rock Music",
+        "duration_ms": 115106,
+        "explicit": false,
+        "popularity": 0,
+        "artists": [
+          {
+            "name": "Charli xcx"
+          }
+        ],
+        "album": {
+          "name": "Music, Fashion, Film",
+          "images": [
+            {
+              "url": "https://i.scdn.co/image/ab67616d0000b273238e2ff91714a8db91b8a64d",
+              "height": 640,
+              "width": 640
+            }
+          ],
+          "release_date": "2026-07-24"
+        },
+        "external_urls": {
+          "spotify": "https://open.spotify.com/track/1KFVosfWWb6oic6sTx6Lxo"
+        }
+      },
+      {
+        "id": "5AzO8bswSqsYtJIfVA2BqX",
+        "name": "HARD",
+        "duration_ms": 214125,
+        "explicit": false,
+        "popularity": 0,
+        "artists": [
+          {
+            "name": "FKA twigs"
+          }
+        ],
+        "album": {
+          "name": "EUSEXUA Afterglow",
+          "images": [
+            {
+              "url": "https://i.scdn.co/image/ab67616d0000b2736089c0f46246e83c090eb0ad",
+              "height": 640,
+              "width": 640
+            }
+          ],
+          "release_date": "2025-11-14"
+        },
+        "external_urls": {
+          "spotify": "https://open.spotify.com/track/5AzO8bswSqsYtJIfVA2BqX"
+        }
+      },
+      {
+        "id": "74Rcdai3OPZa7vBRbhKOtJ",
+        "name": "Cortt",
+        "duration_ms": 251530,
+        "explicit": false,
+        "popularity": 0,
+        "artists": [
+          {
+            "name": "The Hellp"
+          }
+        ],
+        "album": {
+          "name": "Riviera",
+          "images": [
+            {
+              "url": "https://i.scdn.co/image/ab67616d0000b273ee06e177537d2e49fa2902eb",
+              "height": 640,
+              "width": 640
+            }
+          ],
+          "release_date": "2025-11-21"
+        },
+        "external_urls": {
+          "spotify": "https://open.spotify.com/track/74Rcdai3OPZa7vBRbhKOtJ"
+        }
+      },
+      {
+        "id": "09xhawlPUifhftf8zuie7w",
+        "name": "Fever",
+        "duration_ms": 144521,
+        "explicit": true,
+        "popularity": 0,
+        "artists": [
+          {
+            "name": "Buckshot"
+          },
+          {
+            "name": "fakemink"
+          }
+        ],
+        "album": {
+          "name": "Fever",
+          "images": [
+            {
+              "url": "https://i.scdn.co/image/ab67616d0000b2732d38f415aab015135c802947",
+              "height": 640,
+              "width": 640
+            }
+          ],
+          "release_date": "2025-08-22"
+        },
+        "external_urls": {
+          "spotify": "https://open.spotify.com/track/09xhawlPUifhftf8zuie7w"
+        }
+      },
+      {
+        "id": "6PMSpoBxswOQOkgWXv0ih3",
+        "name": "Essex_Honey.mp3",
+        "duration_ms": 289075,
+        "explicit": false,
+        "popularity": 0,
+        "artists": [
+          {
+            "name": "Blood Orange"
+          }
+        ],
+        "album": {
+          "name": "Essex_Honey.mp3",
+          "images": [
+            {
+              "url": "https://i.scdn.co/image/ab67616d0000b273fd88e27f03f670d4a813bcaf",
+              "height": 640,
+              "width": 640
+            }
+          ],
+          "release_date": "2026-05-29"
+        },
+        "external_urls": {
+          "spotify": "https://open.spotify.com/track/6PMSpoBxswOQOkgWXv0ih3"
+        }
+      },
+      {
+        "id": "7h1OtABVvKN9Okr6KfjMoX",
+        "name": "Missed Connections",
+        "duration_ms": 163505,
+        "explicit": true,
+        "popularity": 0,
+        "artists": [
+          {
+            "name": "Chase Icon"
+          }
+        ],
+        "album": {
+          "name": "Icon Baby",
+          "images": [
+            {
+              "url": "https://i.scdn.co/image/ab67616d0000b27336f251a396493bf87d2e01b8",
+              "height": 640,
+              "width": 640
+            }
+          ],
+          "release_date": "2025-03-25"
+        },
+        "external_urls": {
+          "spotify": "https://open.spotify.com/track/7h1OtABVvKN9Okr6KfjMoX"
+        }
+      },
+      {
+        "id": "0nsIevK1SeDfZzDOi6Si75",
+        "name": "Crush",
+        "duration_ms": 204317,
+        "explicit": true,
+        "popularity": 0,
+        "artists": [
+          {
+            "name": "Ethel Cain"
+          }
+        ],
+        "album": {
+          "name": "Inbred",
+          "images": [
+            {
+              "url": "https://i.scdn.co/image/ab67616d0000b273f044eadcf908a0e9649512db",
+              "height": 640,
+              "width": 640
+            }
+          ],
+          "release_date": "2021-04-23"
+        },
+        "external_urls": {
+          "spotify": "https://open.spotify.com/track/0nsIevK1SeDfZzDOi6Si75"
+        }
+      },
+      {
+        "id": "0H0eIjcXruQpntK0LuNa5v",
+        "name": "How to Pretend",
+        "duration_ms": 224086,
+        "explicit": true,
+        "popularity": 0,
+        "artists": [
+          {
+            "name": "Lucy Bedroque"
+          }
+        ],
+        "album": {
+          "name": "Fête de la Vanille",
+          "images": [
+            {
+              "url": "https://i.scdn.co/image/ab67616d0000b273367048530b1e018c30162d35",
+              "height": 640,
+              "width": 640
+            }
+          ],
+          "release_date": "2024-10-04"
+        },
+        "external_urls": {
+          "spotify": "https://open.spotify.com/track/0H0eIjcXruQpntK0LuNa5v"
+        }
+      },
+      {
+        "id": "5BUTPG0Csnl1fF5RFg5lUH",
+        "name": "How to Teleport",
+        "duration_ms": 273285,
+        "explicit": true,
+        "popularity": 0,
+        "artists": [
+          {
+            "name": "Jane Remover"
+          }
+        ],
+        "album": {
+          "name": "♡",
+          "images": [
+            {
+              "url": "https://i.scdn.co/image/ab67616d0000b27356818098087e597b8b8095b4",
+              "height": 640,
+              "width": 640
+            }
+          ],
+          "release_date": "2025-12-05"
+        },
+        "external_urls": {
+          "spotify": "https://open.spotify.com/track/5BUTPG0Csnl1fF5RFg5lUH"
+        }
+      },
+      {
+        "id": "4rXdgnwfuHyWhIFWdzw5cy",
+        "name": "Perfectly",
+        "duration_ms": 230797,
+        "explicit": false,
+        "popularity": 0,
+        "artists": [
+          {
+            "name": "FKA twigs"
+          }
+        ],
+        "album": {
+          "name": "EUSEXUA",
+          "images": [
+            {
+              "url": "https://i.scdn.co/image/ab67616d0000b2730f8672bbdf3edd87a99cfc0f",
+              "height": 640,
+              "width": 640
+            }
+          ],
+          "release_date": "2025-11-12"
+        },
+        "external_urls": {
+          "spotify": "https://open.spotify.com/track/4rXdgnwfuHyWhIFWdzw5cy"
+        }
+      }
+    ]
+  },
+  "long_term": {
+    "artists": [
+      {
+        "id": "25uiPmTg16RbhZWAqwLBy5",
+        "name": "Charli xcx",
+        "images": [
+          {
+            "url": "https://i.scdn.co/image/ab6761610000e5eb6fa76436a2bba83b9f1d6fd1",
+            "height": 640,
+            "width": 640
+          }
+        ],
+        "external_urls": {
+          "spotify": "https://open.spotify.com/artist/25uiPmTg16RbhZWAqwLBy5"
+        },
+        "genres": [],
+        "popularity": 0
+      },
+      {
+        "id": "78rUTD7y6Cy67W1RVzYs7t",
+        "name": "PinkPantheress",
+        "images": [
+          {
+            "url": "https://i.scdn.co/image/ab6761610000e5eb6bf10d74063b45938f5d8656",
+            "height": 640,
+            "width": 640
+          }
+        ],
+        "external_urls": {
+          "spotify": "https://open.spotify.com/artist/78rUTD7y6Cy67W1RVzYs7t"
+        },
+        "genres": [],
+        "popularity": 0
+      },
+      {
+        "id": "6LEeAFiJF8OuPx747e1wxR",
+        "name": "Blood Orange",
+        "images": [
+          {
+            "url": "https://i.scdn.co/image/ab6761610000e5eb82a833d61eafc09c05c24882",
+            "height": 640,
+            "width": 640
+          }
+        ],
+        "external_urls": {
+          "spotify": "https://open.spotify.com/artist/6LEeAFiJF8OuPx747e1wxR"
+        },
+        "genres": [],
+        "popularity": 0
+      },
+      {
+        "id": "3M3wTTCDwicRubwMyHyEDy",
+        "name": "Shygirl",
+        "images": [
+          {
+            "url": "https://i.scdn.co/image/ab6761610000e5eb9b343c5050b7c6bb732917e6",
+            "height": 640,
+            "width": 640
+          }
+        ],
+        "external_urls": {
+          "spotify": "https://open.spotify.com/artist/3M3wTTCDwicRubwMyHyEDy"
+        },
+        "genres": [],
+        "popularity": 0
+      },
+      {
+        "id": "181bsRPaVXVlUKXrxwZfHK",
+        "name": "Megan Thee Stallion",
+        "images": [
+          {
+            "url": "https://i.scdn.co/image/ab6761610000e5eb87bd67666fc718a750ea804f",
+            "height": 640,
+            "width": 640
+          }
+        ],
+        "external_urls": {
+          "spotify": "https://open.spotify.com/artist/181bsRPaVXVlUKXrxwZfHK"
+        },
+        "genres": [],
+        "popularity": 0
+      },
+      {
+        "id": "6qgnBH6iDM91ipVXv28OMu",
+        "name": "KAYTRANADA",
+        "images": [
+          {
+            "url": "https://i.scdn.co/image/ab6761610000e5eb9b9d4fdf5e4cf58e2fa93167",
+            "height": 640,
+            "width": 640
+          }
+        ],
+        "external_urls": {
+          "spotify": "https://open.spotify.com/artist/6qgnBH6iDM91ipVXv28OMu"
+        },
+        "genres": [],
+        "popularity": 0
+      },
+      {
+        "id": "6nB0iY1cjSY1KyhYyuIIKH",
+        "name": "FKA twigs",
+        "images": [
+          {
+            "url": "https://i.scdn.co/image/ab6761610000e5eb3f6b8973be0344896d8680ab",
+            "height": 640,
+            "width": 640
+          }
+        ],
+        "external_urls": {
+          "spotify": "https://open.spotify.com/artist/6nB0iY1cjSY1KyhYyuIIKH"
+        },
+        "genres": [],
+        "popularity": 0
+      },
+      {
+        "id": "6vWDO969PvNqNYHIOW5v0m",
+        "name": "Beyoncé",
+        "images": [
+          {
+            "url": "https://i.scdn.co/image/ab6761610000e5eb7eaa373538359164b843f7c0",
+            "height": 640,
+            "width": 640
+          }
+        ],
+        "external_urls": {
+          "spotify": "https://open.spotify.com/artist/6vWDO969PvNqNYHIOW5v0m"
+        },
+        "genres": [],
+        "popularity": 0
+      },
+      {
+        "id": "6nS5roXSAGhTGr34W6n7Et",
+        "name": "Disclosure",
+        "images": [
+          {
+            "url": "https://i.scdn.co/image/ab6761610000e5eb0b084ede947f009beade9a6a",
+            "height": 640,
+            "width": 640
+          }
+        ],
+        "external_urls": {
+          "spotify": "https://open.spotify.com/artist/6nS5roXSAGhTGr34W6n7Et"
+        },
+        "genres": [],
+        "popularity": 0
+      },
+      {
+        "id": "7gRhy3MIPHQo5CXYfWaw9I",
+        "name": "Azealia Banks",
+        "images": [
+          {
+            "url": "https://i.scdn.co/image/ab6761610000e5eb1b227136246869eb248cafef",
+            "height": 640,
+            "width": 640
+          }
+        ],
+        "external_urls": {
+          "spotify": "https://open.spotify.com/artist/7gRhy3MIPHQo5CXYfWaw9I"
+        },
+        "genres": [],
+        "popularity": 0
+      }
+    ],
+    "tracks": [
+      {
+        "id": "5AzO8bswSqsYtJIfVA2BqX",
+        "name": "HARD",
+        "duration_ms": 214125,
+        "explicit": false,
+        "popularity": 0,
+        "artists": [
+          {
+            "name": "FKA twigs"
+          }
+        ],
+        "album": {
+          "name": "EUSEXUA Afterglow",
+          "images": [
+            {
+              "url": "https://i.scdn.co/image/ab67616d0000b2736089c0f46246e83c090eb0ad",
+              "height": 640,
+              "width": 640
+            }
+          ],
+          "release_date": "2025-11-14"
+        },
+        "external_urls": {
+          "spotify": "https://open.spotify.com/track/5AzO8bswSqsYtJIfVA2BqX"
+        }
+      },
+      {
+        "id": "66O0pFEFp23dgYjoAd6RKK",
+        "name": "The Big Big Beat",
+        "duration_ms": 215599,
+        "explicit": true,
+        "popularity": 0,
+        "artists": [
+          {
+            "name": "Azealia Banks"
+          }
+        ],
+        "album": {
+          "name": "Slay-Z",
+          "images": [
+            {
+              "url": "https://i.scdn.co/image/ab67616d0000b2737e4f8688f66f740111420970",
+              "height": 640,
+              "width": 640
+            }
+          ],
+          "release_date": "2017-07-07"
+        },
+        "external_urls": {
+          "spotify": "https://open.spotify.com/track/66O0pFEFp23dgYjoAd6RKK"
+        }
+      },
+      {
+        "id": "5cYEuFqzITZlZzpoR1sHvu",
+        "name": "Yuck",
+        "duration_ms": 138800,
+        "explicit": true,
+        "popularity": 0,
+        "artists": [
+          {
+            "name": "Charli xcx"
+          }
+        ],
+        "album": {
+          "name": "CRASH",
+          "images": [
+            {
+              "url": "https://i.scdn.co/image/ab67616d0000b273eefcaa4f481bb1c3b3b53743",
+              "height": 640,
+              "width": 640
+            }
+          ],
+          "release_date": "2022-03-18"
+        },
+        "external_urls": {
+          "spotify": "https://open.spotify.com/track/5cYEuFqzITZlZzpoR1sHvu"
+        }
+      },
+      {
+        "id": "3LmlegS3av5opwiIMVDbgI",
+        "name": "Liquorice",
+        "duration_ms": 196764,
+        "explicit": true,
+        "popularity": 0,
+        "artists": [
+          {
+            "name": "Azealia Banks"
+          }
+        ],
+        "album": {
+          "name": "1991 - EP",
+          "images": [
+            {
+              "url": "https://i.scdn.co/image/ab67616d0000b2734c17473b5cdeed952815289f",
+              "height": 640,
+              "width": 640
+            }
+          ],
+          "release_date": "2012-05-28"
+        },
+        "external_urls": {
+          "spotify": "https://open.spotify.com/track/3LmlegS3av5opwiIMVDbgI"
+        }
+      },
+      {
+        "id": "2TxbtBLtb1SW0E4LCI8CKu",
+        "name": "4eva",
+        "duration_ms": 140933,
+        "explicit": false,
+        "popularity": 0,
+        "artists": [
+          {
+            "name": "Shygirl"
+          },
+          {
+            "name": "Empress Of"
+          },
+          {
+            "name": "Kingdom"
+          },
+          {
+            "name": "Club Shy"
+          }
+        ],
+        "album": {
+          "name": "Club Shy",
+          "images": [
+            {
+              "url": "https://i.scdn.co/image/ab67616d0000b273cfd21f703f0d93bc542cab88",
+              "height": 640,
+              "width": 640
+            }
+          ],
+          "release_date": "2024-02-09"
+        },
+        "external_urls": {
+          "spotify": "https://open.spotify.com/track/2TxbtBLtb1SW0E4LCI8CKu"
+        }
+      },
+      {
+        "id": "62fqMvguJbsSs9HKhhRfuS",
+        "name": "Talk talk",
+        "duration_ms": 161757,
+        "explicit": false,
+        "popularity": 0,
+        "artists": [
+          {
+            "name": "Charli xcx"
+          }
+        ],
+        "album": {
+          "name": "BRAT",
+          "images": [
+            {
+              "url": "https://i.scdn.co/image/ab67616d0000b273f88b43d15fd14e9525338b59",
+              "height": 640,
+              "width": 640
+            }
+          ],
+          "release_date": "2024-06-07"
+        },
+        "external_urls": {
+          "spotify": "https://open.spotify.com/track/62fqMvguJbsSs9HKhhRfuS"
+        }
+      },
+      {
+        "id": "56v8WEnGzLByGsDAXDiv4d",
+        "name": "ETA",
+        "duration_ms": 151373,
+        "explicit": false,
+        "popularity": 0,
+        "artists": [
+          {
+            "name": "NewJeans"
+          }
+        ],
+        "album": {
+          "name": "NewJeans 2nd EP 'Get Up'",
+          "images": [
+            {
+              "url": "https://i.scdn.co/image/ab67616d0000b2730744690248ef3ba7b776ea7b",
+              "height": 640,
+              "width": 640
+            }
+          ],
+          "release_date": "2023-07-21"
+        },
+        "external_urls": {
+          "spotify": "https://open.spotify.com/track/56v8WEnGzLByGsDAXDiv4d"
+        }
+      },
+      {
+        "id": "0FZUbqZ1x2G71vl027d8Ud",
+        "name": "Hot Girl (Bodies Bodies Bodies)",
+        "duration_ms": 157078,
+        "explicit": true,
+        "popularity": 0,
+        "artists": [
+          {
+            "name": "Charli xcx"
+          }
+        ],
+        "album": {
+          "name": "Hot Girl (Bodies Bodies Bodies)",
+          "images": [
+            {
+              "url": "https://i.scdn.co/image/ab67616d0000b2734e6ea0c72918cbbfd2376d5f",
+              "height": 640,
+              "width": 640
+            }
+          ],
+          "release_date": "2022-07-27"
+        },
+        "external_urls": {
+          "spotify": "https://open.spotify.com/track/0FZUbqZ1x2G71vl027d8Ud"
+        }
+      },
+      {
+        "id": "0fsgieABBLYkx6rk5N3JUD",
+        "name": "NISSAN ALTIMA",
+        "duration_ms": 128132,
+        "explicit": true,
+        "popularity": 0,
+        "artists": [
+          {
+            "name": "Doechii"
+          }
+        ],
+        "album": {
+          "name": "NISSAN ALTIMA",
+          "images": [
+            {
+              "url": "https://i.scdn.co/image/ab67616d0000b2738ecf9e6aa4535a42ab6ae379",
+              "height": 640,
+              "width": 640
+            }
+          ],
+          "release_date": "2024-08-02"
+        },
+        "external_urls": {
+          "spotify": "https://open.spotify.com/track/0fsgieABBLYkx6rk5N3JUD"
+        }
+      },
+      {
+        "id": "2uQW9N6ObJYPV9HKgl1AAH",
+        "name": "F*Me",
+        "duration_ms": 188348,
+        "explicit": true,
+        "popularity": 0,
+        "artists": [
+          {
+            "name": "Shygirl"
+          },
+          {
+            "name": "Club Shy"
+          },
+          {
+            "name": "Yseult"
+          }
+        ],
+        "album": {
+          "name": "F*Me",
+          "images": [
+            {
+              "url": "https://i.scdn.co/image/ab67616d0000b273f5b1d1820da84969a574ab29",
+              "height": 640,
+              "width": 640
+            }
+          ],
+          "release_date": "2024-12-09"
+        },
+        "external_urls": {
+          "spotify": "https://open.spotify.com/track/2uQW9N6ObJYPV9HKgl1AAH"
+        }
+      }
+    ]
+  },
+  "recent": []
+} as const;

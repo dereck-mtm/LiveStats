@@ -96,9 +96,16 @@ try {
   snapshot.recent = [];
 }
 
-const out = resolve("src/data/public-stats.json");
-writeFileSync(out, JSON.stringify(snapshot, null, 2));
-console.log("Wrote", out);
+const jsonOut = resolve("src/data/public-stats.json");
+const tsOut = resolve("src/data/public-stats.ts");
+const body = JSON.stringify(snapshot, null, 2);
+writeFileSync(jsonOut, body);
+writeFileSync(
+  tsOut,
+  `/* Auto-generated listening snapshot — do not edit by hand */\nexport const publicStats = ${body} as const;\n`,
+);
+console.log("Wrote", jsonOut);
+console.log("Wrote", tsOut);
 console.log(
   "User:",
   snapshot.profile.display_name,
