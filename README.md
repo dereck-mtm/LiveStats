@@ -1,44 +1,38 @@
 # LiveStats
 
-A **public** Spotify listening page for your own habits — top artists, top tracks, and recently played — so you can share the link with friends. Visitors do not need a Spotify account.
+Personal Spotify listening analytics — a listen.fm-style portfolio dashboard for **my** habits: affinity charts, track-length mix, sticky artists across time windows, and ranked top lists.
 
-## How it works
+**Live:** https://livestats-mtm26.vercel.app
 
-1. You connect Spotify once at `/owner`.
-2. You add `SPOTIFY_REFRESH_TOKEN` to Vercel env (copied from the owner page).
-3. The homepage fetches **your** stats from Spotify for every visitor.
+## Stack
 
-## Quick start
+Next.js · TypeScript · Tailwind · Recharts · Spotify Web API snapshot
+
+## Run locally
 
 ```bash
 npm install
-cp .env.example .env.local
-# Fill SPOTIFY_CLIENT_SECRET (and later SPOTIFY_REFRESH_TOKEN)
 npm run dev
 ```
 
-Open [http://127.0.0.1:43127](http://127.0.0.1:43127) for the public page and [http://127.0.0.1:43127/owner](http://127.0.0.1:43127/owner) to connect.
+Open http://127.0.0.1:43127
 
-## Spotify dashboard
+## Refresh your data
 
-Redirect URIs:
+From the Spotify Web API console (or OAuth), grab a token with `user-top-read`, then:
 
-- `http://127.0.0.1:43127/api/auth/callback`
-- `https://livestats-mtm26.vercel.app/api/auth/callback`
+```bash
+SPOTIFY_ACCESS_TOKEN='...' npm run sync:spotify
+```
 
-Allowlist your Spotify user under User Management (Development mode).
+Or with a refresh token:
 
-## Environment variables
+```bash
+SPOTIFY_CLIENT_ID=... SPOTIFY_CLIENT_SECRET=... SPOTIFY_REFRESH_TOKEN=... npm run sync:spotify
+```
 
-| Name | Purpose |
-|------|---------|
-| `SPOTIFY_CLIENT_ID` | App Client ID |
-| `SPOTIFY_CLIENT_SECRET` | App Client Secret |
-| `SPOTIFY_REFRESH_TOKEN` | **Your** refresh token — powers the public page |
-| `AUTH_SECRET` | Signs owner session cookies |
-| `NEXT_PUBLIC_APP_URL` | Public origin for OAuth redirects |
+This overwrites `src/data/public-stats.json`. Commit + redeploy to update the public site.
 
-## Notes
+## Why a snapshot?
 
-- Spotify top items are affinity-ranked (not raw play counts). For lifetime play counts, request **Extended streaming history** from Spotify privacy settings and we can add an upload view later.
-- Development-mode apps only allow allowlisted users to complete OAuth (you). Visitors only view the page.
+This is a portfolio project: the site presents analyzed listening data with charts. A checked-in snapshot keeps the demo stable for recruiters; re-running `sync:spotify` updates it with current habits.
