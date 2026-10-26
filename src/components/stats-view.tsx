@@ -80,9 +80,11 @@ export function StatsView({
             >
               {isPublicLive
                 ? "Live from Spotify"
-                : stats.source === "owner-session"
-                  ? "Owner preview"
-                  : "Sample data"}
+                : stats.source === "snapshot"
+                  ? "Your Spotify data"
+                  : stats.source === "owner-session"
+                    ? "Owner preview"
+                    : "Sample data"}
             </span>
             {showOwnerLink && (
               <Link
@@ -133,13 +135,29 @@ export function StatsView({
           </Suspense>
         </section>
 
+        {stats.source === "snapshot" && stats.fetchedAt && (
+          <p className="mt-6 text-sm text-mist">
+            Snapshot from{" "}
+            {new Intl.DateTimeFormat("en-US", {
+              dateStyle: "medium",
+              timeStyle: "short",
+              timeZone: "America/Los_Angeles",
+            }).format(new Date(stats.fetchedAt))}{" "}
+            PT. For always-fresh stats, connect at{" "}
+            <Link href="/owner" className="text-lime underline">
+              /owner
+            </Link>{" "}
+            and add <code className="text-fog">SPOTIFY_REFRESH_TOKEN</code>.
+          </p>
+        )}
+
         {stats.mode === "demo" && !stats.error && (
           <p className="mt-6 rounded-xl border border-lime/25 bg-lime/10 px-4 py-3 text-sm text-fog">
-            This is sample data until the owner connects Spotify once.{" "}
+            This is sample data until your Spotify snapshot is published.{" "}
             <Link href="/owner" className="font-semibold text-lime underline">
               Connect your account
-            </Link>{" "}
-            so visitors see your real listening stats.
+            </Link>
+            .
           </p>
         )}
 
