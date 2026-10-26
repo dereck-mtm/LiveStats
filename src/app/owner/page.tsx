@@ -16,80 +16,84 @@ export default async function OwnerPage({
   const publicReady = Boolean(process.env.SPOTIFY_REFRESH_TOKEN?.trim());
 
   return (
-    <main className="min-h-screen px-5 py-10 sm:px-8">
-      <div className="mx-auto max-w-xl">
-        <Link href="/" className="text-sm font-medium text-accent hover:underline">
-          ← Dashboard
+    <main className="min-h-screen bg-canvas px-6 py-10 text-ink sm:px-10">
+      <div className="mx-auto max-w-lg">
+        <Link
+          href="/"
+          className="text-[13px] font-medium text-blue hover:opacity-70"
+        >
+          ← LiveStats
         </Link>
-        <h1 className="mt-6 font-[family-name:var(--font-display)] text-4xl font-semibold tracking-[-0.03em] text-ink">
-          Live refresh setup
+        <h1 className="mt-10 text-[40px] font-semibold tracking-[-0.045em]">
+          Live refresh
         </h1>
-        <p className="mt-3 text-[0.95rem] leading-relaxed text-ink-soft">
-          The dashboard auto-refreshes every 10 minutes. For true live Spotify
-          pulls (not just the saved snapshot), connect once and add your refresh
-          token to Vercel.
+        <p className="mt-3 text-[17px] leading-relaxed text-secondary">
+          Auto-refresh runs every 10 minutes. Add a refresh token so those
+          pulls hit Spotify instead of the saved snapshot.
         </p>
 
         {connected && session ? (
-          <p className="mt-6 rounded-2xl border border-black/8 bg-white px-4 py-3 text-sm shadow-[var(--shadow)]">
-            Connected as <strong>{session.displayName}</strong>.
+          <p className="mt-6 rounded-2xl bg-well px-4 py-3 text-[14px]">
+            Connected as <strong>{session.displayName}</strong>
           </p>
         ) : null}
 
-        <ol className="mt-8 space-y-8 text-sm leading-relaxed text-ink-soft">
-          <li className="panel p-5">
-            <p className="font-semibold text-ink">1. Connect Spotify</p>
-            <p className="mt-2">
-              Allowlist your email in the Spotify dashboard, then connect:
+        <div className="mt-10 space-y-4">
+          <div className="rounded-[24px] bg-well p-6">
+            <p className="text-[15px] font-semibold tracking-[-0.02em]">
+              1. Connect Spotify
             </p>
-            <div className="mt-4">
+            <p className="mt-2 text-[14px] text-secondary">
+              Allowlist your email in the Spotify dashboard, then connect.
+            </p>
+            <div className="mt-5">
               {ready ? (
                 <a
                   href="/api/auth/login"
-                  className="inline-flex rounded-full bg-ink px-5 py-2.5 font-medium text-white"
+                  className="inline-flex rounded-full bg-ink px-5 py-2.5 text-[14px] font-medium text-white"
                 >
                   {session ? "Reconnect" : "Connect Spotify"}
                 </a>
               ) : (
-                <p className="text-coral">Client credentials missing in env.</p>
+                <p className="text-[14px] text-[#ff3b30]">
+                  Client credentials missing.
+                </p>
               )}
             </div>
-          </li>
+          </div>
 
-          <li className="panel p-5">
-            <p className="font-semibold text-ink">2. Add SPOTIFY_REFRESH_TOKEN</p>
-            <p className="mt-2">
-              Paste into Vercel → LiveStats → Environment Variables, then
-              redeploy. After that,{" "}
-              <code className="rounded bg-black/5 px-1">/api/stats</code> pulls
-              fresh tops about every 10 minutes.
+          <div className="rounded-[24px] bg-well p-6">
+            <p className="text-[15px] font-semibold tracking-[-0.02em]">
+              2. Add SPOTIFY_REFRESH_TOKEN on Vercel
+            </p>
+            <p className="mt-2 text-[14px] text-secondary">
+              Then redeploy. Status:{" "}
+              {publicReady ? (
+                <span className="text-[#34c759]">live token set</span>
+              ) : (
+                <span className="text-[#ff3b30]">snapshot only</span>
+              )}
             </p>
             {session ? (
               <div className="mt-4">
                 <CopyToken token={session.refreshToken} />
               </div>
             ) : (
-              <p className="mt-3 text-muted">Connect first to reveal the token.</p>
+              <p className="mt-3 text-[13px] text-tertiary">
+                Connect first to reveal the token.
+              </p>
             )}
-            <p className="mt-3">
-              Status:{" "}
-              {publicReady ? (
-                <span className="font-medium text-teal">live token configured</span>
-              ) : (
-                <span className="font-medium text-coral">
-                  using snapshot until token is set
-                </span>
-              )}
-            </p>
-          </li>
+          </div>
 
-          <li className="panel p-5">
-            <p className="font-semibold text-ink">3. Redirect URI</p>
-            <pre className="mt-2 overflow-x-auto rounded-xl bg-[#f0f0f2] p-3 text-[0.8rem] text-ink">
+          <div className="rounded-[24px] bg-well p-6">
+            <p className="text-[15px] font-semibold tracking-[-0.02em]">
+              3. Redirect URI
+            </p>
+            <pre className="mt-3 overflow-x-auto rounded-xl bg-white/80 p-3 text-[12px]">
               https://livestats-mtm26.vercel.app/api/auth/callback
             </pre>
-          </li>
-        </ol>
+          </div>
+        </div>
       </div>
     </main>
   );

@@ -1,29 +1,19 @@
 import type { Metadata } from "next";
-import { Manrope, Outfit } from "next/font/google";
+import { GeistSans } from "geist/font/sans";
 import "./globals.css";
 
-const display = Outfit({
-  variable: "--font-display",
-  subsets: ["latin"],
-  weight: ["500", "600", "700"],
-});
-
-const body = Manrope({
-  variable: "--font-body",
-  subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
-});
-
 export const metadata: Metadata = {
-  title: "LiveStats — dereck’s listening analytics",
+  title: "LiveStats",
   description:
-    "Personal Spotify analytics dashboard with affinity charts, catalog shape, and sticky artists — a data portfolio project.",
+    "Personal Spotify listening analytics — affinity, catalog shape, and artists that stick.",
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="en" className={`${display.variable} ${body.variable} h-full`}>
-      <body className="min-h-full antialiased">{children}</body>
+    <html lang="en" className={`${GeistSans.variable} h-full`}>
+      <body className={`${GeistSans.className} min-h-full antialiased`}>
+        {children}
+      </body>
     </html>
   );
 }
