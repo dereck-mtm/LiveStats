@@ -1,23 +1,23 @@
 import type { Metadata } from "next";
-import { DM_Sans, Syne } from "next/font/google";
+import { Manrope, Outfit } from "next/font/google";
 import "./globals.css";
 
-const display = Syne({
+const display = Outfit({
   variable: "--font-display",
   subsets: ["latin"],
-  weight: ["600", "700", "800"],
+  weight: ["500", "600", "700"],
 });
 
-const body = DM_Sans({
+const body = Manrope({
   variable: "--font-body",
   subsets: ["latin"],
   weight: ["400", "500", "600", "700"],
 });
 
 export const metadata: Metadata = {
-  title: "LiveStats — your Spotify, visualized",
+  title: "LiveStats — dereck’s listening analytics",
   description:
-    "Connect Spotify and see your top artists, tracks, and recent plays in one live dashboard.",
+    "Personal Spotify analytics dashboard with affinity charts, catalog shape, and sticky artists — a data portfolio project.",
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {

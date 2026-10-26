@@ -13,12 +13,13 @@ import {
   YAxis,
 } from "recharts";
 
-const INK = "#0b1210";
-const LIME = "#c6f24a";
-const MIST = "#9bb5a8";
-const FOG = "#d7e3dc";
-const CORAL = "#ff6b4a";
-const TEAL = "#3dd6c6";
+const INK = "#1d1d1f";
+const MUTED = "#6e6e73";
+const GRID = "rgba(0,0,0,0.06)";
+const BLUE = "#0071e3";
+const TEAL = "#00c2a8";
+const CORAL = "#ff5a36";
+const AMBER = "#f5a524";
 
 function Tip({
   active,
@@ -26,17 +27,21 @@ function Tip({
   label,
 }: {
   active?: boolean;
-  payload?: { value: number; name?: string; payload?: Record<string, unknown> }[];
+  payload?: {
+    value: number;
+    name?: string;
+    payload?: Record<string, unknown>;
+  }[];
   label?: string;
 }) {
   if (!active || !payload?.length) return null;
   const row = payload[0];
   const full = (row.payload?.fullName as string) || label;
   return (
-    <div className="rounded-lg border border-white/10 bg-ink-soft px-3 py-2 text-xs text-fog shadow-lg">
-      <p className="font-semibold">{full}</p>
-      <p className="text-mist">
-        {row.name}: {row.value}
+    <div className="rounded-xl border border-black/8 bg-white px-3 py-2 text-xs text-ink shadow-[0_8px_30px_rgba(0,0,0,0.08)]">
+      <p className="font-semibold tracking-tight">{full}</p>
+      <p className="text-muted">
+        {row.name}: <span className="text-ink">{row.value}</span>
       </p>
     </div>
   );
@@ -48,22 +53,30 @@ export function AffinityBarChart({
   data: { name: string; fullName: string; affinity: number; rank: number }[];
 }) {
   return (
-    <div className="h-72 w-full">
+    <div className="h-[300px] w-full">
       <ResponsiveContainer width="100%" height="100%">
-        <BarChart data={data} layout="vertical" margin={{ left: 8, right: 12 }}>
-          <CartesianGrid stroke="rgba(255,255,255,0.06)" horizontal={false} />
-          <XAxis type="number" stroke={MIST} tick={{ fill: MIST, fontSize: 11 }} />
+        <BarChart data={data} layout="vertical" margin={{ left: 4, right: 8, top: 4, bottom: 4 }}>
+          <CartesianGrid stroke={GRID} horizontal={false} />
+          <XAxis
+            type="number"
+            stroke={MUTED}
+            tick={{ fill: MUTED, fontSize: 11 }}
+            axisLine={false}
+            tickLine={false}
+          />
           <YAxis
             type="category"
             dataKey="name"
-            width={100}
-            stroke={MIST}
-            tick={{ fill: FOG, fontSize: 11 }}
+            width={108}
+            stroke={MUTED}
+            tick={{ fill: INK, fontSize: 12, fontWeight: 500 }}
+            axisLine={false}
+            tickLine={false}
           />
-          <Tooltip content={<Tip />} cursor={{ fill: "rgba(198,242,74,0.08)" }} />
-          <Bar dataKey="affinity" name="Affinity" radius={[0, 6, 6, 0]}>
+          <Tooltip content={<Tip />} cursor={{ fill: "rgba(0,113,227,0.05)" }} />
+          <Bar dataKey="affinity" name="Affinity" radius={[0, 8, 8, 0]} barSize={16}>
             {data.map((_, i) => (
-              <Cell key={i} fill={i === 0 ? LIME : TEAL} />
+              <Cell key={i} fill={i === 0 ? BLUE : i < 3 ? TEAL : "#b4bcc8"} />
             ))}
           </Bar>
         </BarChart>
@@ -78,21 +91,29 @@ export function DurationBarChart({
   data: { name: string; fullName: string; minutes: number; rank: number }[];
 }) {
   return (
-    <div className="h-72 w-full">
+    <div className="h-[300px] w-full">
       <ResponsiveContainer width="100%" height="100%">
-        <BarChart data={data} margin={{ left: 0, right: 8, bottom: 48 }}>
-          <CartesianGrid stroke="rgba(255,255,255,0.06)" vertical={false} />
+        <BarChart data={data} margin={{ left: 0, right: 4, bottom: 52, top: 8 }}>
+          <CartesianGrid stroke={GRID} vertical={false} />
           <XAxis
             dataKey="name"
-            stroke={MIST}
+            stroke={MUTED}
             interval={0}
-            angle={-35}
+            angle={-32}
             textAnchor="end"
-            tick={{ fill: FOG, fontSize: 10 }}
+            tick={{ fill: INK, fontSize: 10, fontWeight: 500 }}
+            axisLine={false}
+            tickLine={false}
           />
-          <YAxis stroke={MIST} tick={{ fill: MIST, fontSize: 11 }} unit="m" />
-          <Tooltip content={<Tip />} cursor={{ fill: "rgba(198,242,74,0.08)" }} />
-          <Bar dataKey="minutes" name="Minutes" fill={CORAL} radius={[6, 6, 0, 0]} />
+          <YAxis
+            stroke={MUTED}
+            tick={{ fill: MUTED, fontSize: 11 }}
+            unit="m"
+            axisLine={false}
+            tickLine={false}
+          />
+          <Tooltip content={<Tip />} cursor={{ fill: "rgba(255,90,54,0.05)" }} />
+          <Bar dataKey="minutes" name="Minutes" fill={CORAL} radius={[8, 8, 0, 0]} barSize={22} />
         </BarChart>
       </ResponsiveContainer>
     </div>
@@ -111,23 +132,27 @@ export function StickyArtistsChart({
 }) {
   const top = data.slice(0, 8);
   return (
-    <div className="h-72 w-full">
+    <div className="h-[300px] w-full">
       <ResponsiveContainer width="100%" height="100%">
-        <BarChart data={top} margin={{ left: 0, right: 8, bottom: 40 }}>
-          <CartesianGrid stroke="rgba(255,255,255,0.06)" vertical={false} />
+        <BarChart data={top} margin={{ left: 0, right: 4, bottom: 44, top: 8 }}>
+          <CartesianGrid stroke={GRID} vertical={false} />
           <XAxis
             dataKey="name"
-            stroke={MIST}
+            stroke={MUTED}
             interval={0}
-            angle={-30}
+            angle={-28}
             textAnchor="end"
-            tick={{ fill: FOG, fontSize: 10 }}
+            tick={{ fill: INK, fontSize: 10, fontWeight: 500 }}
+            axisLine={false}
+            tickLine={false}
           />
           <YAxis
             allowDecimals={false}
             domain={[0, 3]}
-            stroke={MIST}
-            tick={{ fill: MIST, fontSize: 11 }}
+            stroke={MUTED}
+            tick={{ fill: MUTED, fontSize: 11 }}
+            axisLine={false}
+            tickLine={false}
           />
           <Tooltip
             content={({ active, payload }) => {
@@ -138,16 +163,16 @@ export function StickyArtistsChart({
                 labels: string;
               };
               return (
-                <div className="rounded-lg border border-white/10 bg-ink-soft px-3 py-2 text-xs text-fog">
-                  <p className="font-semibold">{p.fullName}</p>
-                  <p className="text-mist">
+                <div className="rounded-xl border border-black/8 bg-white px-3 py-2 text-xs shadow-[0_8px_30px_rgba(0,0,0,0.08)]">
+                  <p className="font-semibold text-ink">{p.fullName}</p>
+                  <p className="text-muted">
                     In {p.windows}/3 windows ({p.labels})
                   </p>
                 </div>
               );
             }}
           />
-          <Bar dataKey="windows" name="Windows" fill={LIME} radius={[6, 6, 0, 0]} />
+          <Bar dataKey="windows" name="Windows" fill={AMBER} radius={[8, 8, 0, 0]} barSize={22} />
         </BarChart>
       </ResponsiveContainer>
     </div>
@@ -159,35 +184,37 @@ export function ExplicitPie({
 }: {
   data: { name: string; value: number }[];
 }) {
-  const colors = [CORAL, LIME];
+  const colors = [CORAL, BLUE];
   if (!data.length) {
     return (
-      <p className="flex h-72 items-center justify-center text-sm text-mist">
+      <p className="flex h-[300px] items-center justify-center text-sm text-muted">
         No track mix data
       </p>
     );
   }
   return (
-    <div className="h-72 w-full">
+    <div className="relative h-[300px] w-full">
       <ResponsiveContainer width="100%" height="100%">
         <PieChart>
           <Pie
             data={data}
             dataKey="value"
             nameKey="name"
-            innerRadius={55}
-            outerRadius={90}
+            innerRadius={68}
+            outerRadius={98}
             paddingAngle={3}
+            stroke="#fff"
+            strokeWidth={3}
           >
             {data.map((_, i) => (
-              <Cell key={i} fill={colors[i % colors.length]} stroke={INK} />
+              <Cell key={i} fill={colors[i % colors.length]} />
             ))}
           </Pie>
           <Tooltip
             content={({ active, payload }) => {
               if (!active || !payload?.length) return null;
               return (
-                <div className="rounded-lg border border-white/10 bg-ink-soft px-3 py-2 text-xs text-fog">
+                <div className="rounded-xl border border-black/8 bg-white px-3 py-2 text-xs text-ink shadow-[0_8px_30px_rgba(0,0,0,0.08)]">
                   {payload[0].name}: {payload[0].value}
                 </div>
               );
@@ -195,6 +222,16 @@ export function ExplicitPie({
           />
         </PieChart>
       </ResponsiveContainer>
+      <div className="pointer-events-none absolute inset-0 flex items-center justify-center">
+        <div className="text-center">
+          <p className="text-2xl font-semibold tracking-tight text-ink">
+            {data.reduce((s, d) => s + d.value, 0)}
+          </p>
+          <p className="text-[11px] font-medium uppercase tracking-[0.14em] text-muted">
+            tracks
+          </p>
+        </div>
+      </div>
     </div>
   );
 }

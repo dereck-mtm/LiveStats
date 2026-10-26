@@ -16,102 +16,80 @@ export default async function OwnerPage({
   const publicReady = Boolean(process.env.SPOTIFY_REFRESH_TOKEN?.trim());
 
   return (
-    <main className="min-h-screen bg-ink px-6 py-12 text-fog sm:px-10">
-      <div className="mx-auto max-w-2xl">
-        <Link href="/" className="text-sm text-mist hover:text-lime">
-          ← Public stats
+    <main className="min-h-screen px-5 py-10 sm:px-8">
+      <div className="mx-auto max-w-xl">
+        <Link href="/" className="text-sm font-medium text-accent hover:underline">
+          ← Dashboard
         </Link>
-        <h1 className="mt-6 font-[family-name:var(--font-display)] text-4xl font-extrabold tracking-tight">
-          Share your listening
+        <h1 className="mt-6 font-[family-name:var(--font-display)] text-4xl font-semibold tracking-[-0.03em] text-ink">
+          Live refresh setup
         </h1>
-        <p className="mt-3 text-mist">
-          Connect your Spotify once. Visitors to your LiveStats link will see{" "}
-          <span className="text-fog">your</span> top artists, tracks, and
-          recent plays — they do not log in.
+        <p className="mt-3 text-[0.95rem] leading-relaxed text-ink-soft">
+          The dashboard auto-refreshes every 10 minutes. For true live Spotify
+          pulls (not just the saved snapshot), connect once and add your refresh
+          token to Vercel.
         </p>
 
-        {connected && session && (
-          <p className="mt-6 rounded-xl border border-lime/30 bg-lime/10 px-4 py-3 text-sm">
-            Connected as <strong>{session.displayName}</strong>. Finish step 2
-            below so the public page stays live for everyone.
+        {connected && session ? (
+          <p className="mt-6 rounded-2xl border border-black/8 bg-white px-4 py-3 text-sm shadow-[var(--shadow)]">
+            Connected as <strong>{session.displayName}</strong>.
           </p>
-        )}
+        ) : null}
 
-        <ol className="mt-10 space-y-8 text-sm leading-relaxed">
-          <li>
-            <p className="font-semibold text-fog">1. Connect Spotify</p>
-            <p className="mt-2 text-mist">
-              Allowlist your Spotify email in the Developer Dashboard (User
-              Management), then connect:
+        <ol className="mt-8 space-y-8 text-sm leading-relaxed text-ink-soft">
+          <li className="panel p-5">
+            <p className="font-semibold text-ink">1. Connect Spotify</p>
+            <p className="mt-2">
+              Allowlist your email in the Spotify dashboard, then connect:
             </p>
             <div className="mt-4">
               {ready ? (
                 <a
                   href="/api/auth/login"
-                  className="inline-flex rounded-full bg-lime px-6 py-3 font-semibold text-ink hover:bg-lime-deep"
+                  className="inline-flex rounded-full bg-ink px-5 py-2.5 font-medium text-white"
                 >
-                  {session ? "Reconnect Spotify" : "Connect Spotify"}
+                  {session ? "Reconnect" : "Connect Spotify"}
                 </a>
               ) : (
-                <p className="text-coral">
-                  Client ID/Secret missing in env — add them first.
-                </p>
+                <p className="text-coral">Client credentials missing in env.</p>
               )}
             </div>
           </li>
 
-          <li>
-            <p className="font-semibold text-fog">
-              2. Publish for visitors (refresh token)
-            </p>
-            <p className="mt-2 text-mist">
-              Add this as{" "}
-              <code className="text-lime">SPOTIFY_REFRESH_TOKEN</code> in Vercel
-              → Project → Settings → Environment Variables, then redeploy. Keep
-              it private.
+          <li className="panel p-5">
+            <p className="font-semibold text-ink">2. Add SPOTIFY_REFRESH_TOKEN</p>
+            <p className="mt-2">
+              Paste into Vercel → LiveStats → Environment Variables, then
+              redeploy. After that,{" "}
+              <code className="rounded bg-black/5 px-1">/api/stats</code> pulls
+              fresh tops about every 10 minutes.
             </p>
             {session ? (
               <div className="mt-4">
                 <CopyToken token={session.refreshToken} />
               </div>
             ) : (
-              <p className="mt-3 text-mist">
-                Connect in step 1 to reveal your refresh token here.
-              </p>
+              <p className="mt-3 text-muted">Connect first to reveal the token.</p>
             )}
-            <p className="mt-3 text-mist">
-              Public token status:{" "}
+            <p className="mt-3">
+              Status:{" "}
               {publicReady ? (
-                <span className="text-lime">set — visitors see live data</span>
+                <span className="font-medium text-teal">live token configured</span>
               ) : (
-                <span className="text-coral">
-                  not set yet — site still shows sample/owner-only preview
+                <span className="font-medium text-coral">
+                  using snapshot until token is set
                 </span>
               )}
             </p>
           </li>
 
-          <li>
-            <p className="font-semibold text-fog">3. Redirect URI checklist</p>
-            <p className="mt-2 text-mist">
-              Spotify app Redirect URIs must include:
-            </p>
-            <pre className="mt-2 overflow-x-auto rounded-xl bg-ink-soft p-4 text-lime">
+          <li className="panel p-5">
+            <p className="font-semibold text-ink">3. Redirect URI</p>
+            <pre className="mt-2 overflow-x-auto rounded-xl bg-[#f0f0f2] p-3 text-[0.8rem] text-ink">
               https://livestats-mtm26.vercel.app/api/auth/callback
-            </pre>
-            <pre className="mt-2 overflow-x-auto rounded-xl bg-ink-soft p-4 text-lime">
-              http://127.0.0.1:43127/api/auth/callback
             </pre>
           </li>
         </ol>
-
-        {session && (
-          <p className="mt-10 text-sm text-mist">
-            <a href="/api/auth/logout" className="text-fog underline">
-              Sign out
-            </a>
-          </p>
-        )}
       </div>
     </main>
   );

@@ -20,6 +20,7 @@ export type SpotifyTrack = {
   name: string;
   popularity: number;
   duration_ms: number;
+  explicit?: boolean;
   external_urls: { spotify: string };
   artists: { id: string; name: string }[];
   album: {
