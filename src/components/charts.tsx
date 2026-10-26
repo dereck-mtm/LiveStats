@@ -19,6 +19,12 @@ const GRID = "rgba(0,0,0,0.06)";
 const BLUE = "#0071e3";
 const FILL = "#1d1d1f";
 
+/** Pie segment colors — keep in sync with dashboard legend swatches. */
+export const MIX_COLORS: Record<string, string> = {
+  Explicit: INK,
+  Clean: BLUE,
+};
+
 function Tip({
   active,
   payload,
@@ -79,7 +85,7 @@ export function AffinityBarChart({
           <YAxis
             type="category"
             dataKey="name"
-            width={112}
+            width={118}
             tick={{ fill: INK, fontSize: 12, fontWeight: 500 }}
             axisLine={false}
             tickLine={false}
@@ -111,20 +117,24 @@ export function DurationBarChart({
   return (
     <div className="h-[320px] w-full">
       <ResponsiveContainer width="100%" height="100%">
-        <BarChart data={data} margin={{ left: -8, right: 4, bottom: 56, top: 12 }}>
-          <CartesianGrid stroke={GRID} vertical={false} />
+        <BarChart
+          data={data}
+          layout="vertical"
+          margin={{ left: 0, right: 12, top: 8, bottom: 0 }}
+        >
+          <CartesianGrid stroke={GRID} horizontal={false} />
           <XAxis
-            dataKey="name"
-            interval={0}
-            angle={-36}
-            textAnchor="end"
-            tick={{ fill: INK, fontSize: 10, fontWeight: 500 }}
+            type="number"
+            unit="m"
+            tick={{ fill: MUTED, fontSize: 11 }}
             axisLine={false}
             tickLine={false}
           />
           <YAxis
-            tick={{ fill: MUTED, fontSize: 11 }}
-            unit="m"
+            type="category"
+            dataKey="name"
+            width={128}
+            tick={{ fill: INK, fontSize: 11, fontWeight: 500 }}
             axisLine={false}
             tickLine={false}
           />
@@ -134,8 +144,8 @@ export function DurationBarChart({
             name="Minutes"
             fill={FILL}
             fillOpacity={0.88}
-            radius={[10, 10, 0, 0]}
-            barSize={20}
+            radius={[0, 10, 10, 0]}
+            barSize={14}
           />
         </BarChart>
       </ResponsiveContainer>
@@ -153,28 +163,32 @@ export function StickyArtistsChart({
     labels: string;
   }[];
 }) {
-  const top = data.slice(0, 8);
+  const top = data.slice(0, 6);
   if (!top.length) {
     return <EmptyChart />;
   }
   return (
     <div className="h-[320px] w-full">
       <ResponsiveContainer width="100%" height="100%">
-        <BarChart data={top} margin={{ left: -8, right: 4, bottom: 48, top: 12 }}>
-          <CartesianGrid stroke={GRID} vertical={false} />
+        <BarChart
+          data={top}
+          layout="vertical"
+          margin={{ left: 0, right: 12, top: 8, bottom: 0 }}
+        >
+          <CartesianGrid stroke={GRID} horizontal={false} />
           <XAxis
-            dataKey="name"
-            interval={0}
-            angle={-30}
-            textAnchor="end"
-            tick={{ fill: INK, fontSize: 10, fontWeight: 500 }}
+            type="number"
+            allowDecimals={false}
+            domain={[0, 3]}
+            tick={{ fill: MUTED, fontSize: 11 }}
             axisLine={false}
             tickLine={false}
           />
           <YAxis
-            allowDecimals={false}
-            domain={[0, 3]}
-            tick={{ fill: MUTED, fontSize: 11 }}
+            type="category"
+            dataKey="name"
+            width={118}
+            tick={{ fill: INK, fontSize: 12, fontWeight: 500 }}
             axisLine={false}
             tickLine={false}
           />
@@ -206,8 +220,8 @@ export function StickyArtistsChart({
             dataKey="windows"
             name="Windows"
             fill={BLUE}
-            radius={[10, 10, 0, 0]}
-            barSize={20}
+            radius={[0, 10, 10, 0]}
+            barSize={14}
           />
         </BarChart>
       </ResponsiveContainer>
@@ -220,13 +234,12 @@ export function ExplicitPie({
 }: {
   data: { name: string; value: number }[];
 }) {
-  const colors = [INK, BLUE];
   if (!data.length) {
     return <EmptyChart label="No mix data" />;
   }
   const total = data.reduce((s, d) => s + d.value, 0);
   return (
-    <div className="relative h-[320px] w-full">
+    <div className="relative h-[280px] w-full">
       <ResponsiveContainer width="100%" height="100%">
         <PieChart>
           <Pie
@@ -239,8 +252,8 @@ export function ExplicitPie({
             stroke="#ffffff"
             strokeWidth={4}
           >
-            {data.map((_, i) => (
-              <Cell key={i} fill={colors[i % colors.length]} />
+            {data.map((d) => (
+              <Cell key={d.name} fill={MIX_COLORS[d.name] ?? MUTED} />
             ))}
           </Pie>
           <Tooltip

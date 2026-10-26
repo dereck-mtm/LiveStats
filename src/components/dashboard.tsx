@@ -7,6 +7,7 @@ import {
   AffinityBarChart,
   DurationBarChart,
   ExplicitPie,
+  MIX_COLORS,
   StickyArtistsChart,
 } from "@/components/charts";
 import type { StatsPayload } from "@/lib/stats-payload";
@@ -300,10 +301,15 @@ export function Dashboard({ initial }: { initial: StatsPayload }) {
                 </p>
               </figcaption>
               <ExplicitPie data={data.mix} />
-              <div className="mt-1 flex justify-center gap-6 text-[12px] text-tertiary">
+              <div className="mt-2 flex justify-center gap-7 text-[13px] text-secondary">
                 {data.mix.map((m) => (
-                  <span key={m.name}>
-                    {m.name} {m.value}
+                  <span key={m.name} className="inline-flex items-center gap-2">
+                    <span
+                      className="inline-block h-2.5 w-2.5 rounded-full"
+                      style={{ background: MIX_COLORS[m.name] ?? "#86868b" }}
+                    />
+                    {m.name}
+                    <span className="tabular-nums text-ink">{m.value}</span>
                   </span>
                 ))}
               </div>

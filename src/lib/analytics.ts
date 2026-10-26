@@ -73,7 +73,7 @@ export function artistAffinityChart(range: StatsRange) {
 export function trackDurationChart(range: StatsRange) {
   const tracks = getRangeBundle(range).tracks;
   return tracks.map((t, i) => ({
-    name: t.name.length > 16 ? t.name.slice(0, 15) + "…" : t.name,
+    name: t.name.length > 18 ? t.name.slice(0, 17) + "…" : t.name,
     fullName: t.name,
     minutes: Math.round((t.duration_ms / 60000) * 10) / 10,
     rank: i + 1,
