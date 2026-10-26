@@ -41,7 +41,21 @@ export async function GET(request: NextRequest) {
       imageUrl: profile.images?.[0]?.url,
     });
 
-    return NextResponse.redirect(`${appUrl}/dashboard`);
+    // Persist locally so the owner (or agent) can publish SPOTIFY_REFRESH_TOKEN.
+    if (!process.env.VERCEL) {
+      try {
+        const { writeFile } = await import("fs/promises");
+        await writeFile(
+          ".spotify-refresh-token",
+          tokens.refresh_token,
+          "utf8",
+        );
+      } catch {
+        // Non-fatal: owner can still copy from /owner
+      }
+    }
+
+    return NextResponse.redirect(`${appUrl}/owner?connected=1`);
   } catch (e) {
     const message = e instanceof Error ? e.message : "auth_failed";
     return NextResponse.redirect(

@@ -7,7 +7,7 @@ import { buildAuthUrl } from "@/lib/spotify";
 export async function GET() {
   if (!hasSpotifyCredentials()) {
     return NextResponse.redirect(
-      new URL("/dashboard?demo=1", process.env.NEXT_PUBLIC_APP_URL),
+      new URL("/?demo=1", process.env.NEXT_PUBLIC_APP_URL || "http://127.0.0.1:43127"),
     );
   }
 

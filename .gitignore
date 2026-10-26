@@ -25,6 +25,7 @@
 *.pem
 /agent-tools/
 /tmp-scaffold/
+.spotify-refresh-token
 
 # debug
 npm-debug.log*
