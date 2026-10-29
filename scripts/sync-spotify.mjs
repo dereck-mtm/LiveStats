@@ -51,7 +51,16 @@ async function api(token, path) {
 
 function normalizeArtist(a) {
   return {
-    ...a,
+    id: a.id,
+    name: a.name,
+    images: (a.images || []).slice(0, 1).map((i) => ({
+      url: i.url,
+      height: i.height,
+      width: i.width,
+    })),
+    external_urls: a.external_urls
+      ? { spotify: a.external_urls.spotify }
+      : undefined,
     genres: a.genres ?? [],
     popularity: a.popularity ?? 0,
   };
@@ -59,9 +68,26 @@ function normalizeArtist(a) {
 
 function normalizeTrack(t) {
   return {
-    ...t,
-    popularity: t.popularity ?? 0,
+    id: t.id,
+    name: t.name,
     duration_ms: t.duration_ms ?? 0,
+    explicit: !!t.explicit,
+    popularity: t.popularity ?? 0,
+    artists: (t.artists || []).map((a) => ({ name: a.name })),
+    album: t.album
+      ? {
+          name: t.album.name,
+          images: (t.album.images || []).slice(0, 1).map((i) => ({
+            url: i.url,
+            height: i.height,
+            width: i.width,
+          })),
+          release_date: t.album.release_date,
+        }
+      : undefined,
+    external_urls: t.external_urls
+      ? { spotify: t.external_urls.spotify }
+      : undefined,
   };
 }
 

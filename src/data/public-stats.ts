@@ -1,6 +1,6 @@
 /* Auto-generated listening snapshot — do not edit by hand */
 export const publicStats = {
-  "fetchedAt": "2026-10-26T03:59:01.607112Z",
+  "fetchedAt": "2026-10-29T16:11:50.324Z",
   "profile": {
     "id": "dj.cee10",
     "display_name": "dereck",
@@ -342,58 +342,6 @@ export const publicStats = {
         }
       },
       {
-        "id": "09VMgxIhiWqEyI9JQQIr55",
-        "name": "Melatonin",
-        "duration_ms": 222178,
-        "explicit": true,
-        "popularity": 0,
-        "artists": [
-          {
-            "name": "Tinashe"
-          }
-        ],
-        "album": {
-          "name": "Popstar",
-          "images": [
-            {
-              "url": "https://i.scdn.co/image/ab67616d0000b273f8dc54881b35310061266cdf",
-              "height": 640,
-              "width": 640
-            }
-          ],
-          "release_date": "2026-09-25"
-        },
-        "external_urls": {
-          "spotify": "https://open.spotify.com/track/09VMgxIhiWqEyI9JQQIr55"
-        }
-      },
-      {
-        "id": "5X8kkUaUlAyAUr9TYqDFTH",
-        "name": "All For You",
-        "duration_ms": 329933,
-        "explicit": false,
-        "popularity": 0,
-        "artists": [
-          {
-            "name": "Janet Jackson"
-          }
-        ],
-        "album": {
-          "name": "All For You",
-          "images": [
-            {
-              "url": "https://i.scdn.co/image/ab67616d0000b27312da16fd0dec009d45f7dca3",
-              "height": 640,
-              "width": 640
-            }
-          ],
-          "release_date": "2001-01-01"
-        },
-        "external_urls": {
-          "spotify": "https://open.spotify.com/track/5X8kkUaUlAyAUr9TYqDFTH"
-        }
-      },
-      {
         "id": "0nsIevK1SeDfZzDOi6Si75",
         "name": "Crush",
         "duration_ms": 204317,
@@ -420,29 +368,81 @@ export const publicStats = {
         }
       },
       {
-        "id": "59fZ1smcmciapt7NB00t96",
-        "name": "Anna Wintour",
-        "duration_ms": 273908,
+        "id": "09VMgxIhiWqEyI9JQQIr55",
+        "name": "Melatonin",
+        "duration_ms": 222178,
         "explicit": true,
         "popularity": 0,
         "artists": [
           {
-            "name": "Azealia Banks"
+            "name": "Tinashe"
           }
         ],
         "album": {
-          "name": "Anna Wintour",
+          "name": "Popstar",
           "images": [
             {
-              "url": "https://i.scdn.co/image/ab67616d0000b2730fcd35833b93d2e61e6e78d9",
+              "url": "https://i.scdn.co/image/ab67616d0000b273f8dc54881b35310061266cdf",
               "height": 640,
               "width": 640
             }
           ],
-          "release_date": "2018-04-06"
+          "release_date": "2026-09-25"
         },
         "external_urls": {
-          "spotify": "https://open.spotify.com/track/59fZ1smcmciapt7NB00t96"
+          "spotify": "https://open.spotify.com/track/09VMgxIhiWqEyI9JQQIr55"
+        }
+      },
+      {
+        "id": "7BiELrM90hRxpozaIXbsLw",
+        "name": "Sex With Me",
+        "duration_ms": 206400,
+        "explicit": true,
+        "popularity": 0,
+        "artists": [
+          {
+            "name": "Rihanna"
+          }
+        ],
+        "album": {
+          "name": "ANTI (Deluxe)",
+          "images": [
+            {
+              "url": "https://i.scdn.co/image/ab67616d0000b2736be9bac15995f089579074de",
+              "height": 640,
+              "width": 640
+            }
+          ],
+          "release_date": "2016-01-28"
+        },
+        "external_urls": {
+          "spotify": "https://open.spotify.com/track/7BiELrM90hRxpozaIXbsLw"
+        }
+      },
+      {
+        "id": "1RrEB90qVYRsVE1DQsqwuJ",
+        "name": "Beauty Sleep",
+        "duration_ms": 222967,
+        "explicit": false,
+        "popularity": 0,
+        "artists": [
+          {
+            "name": "Jane Remover"
+          }
+        ],
+        "album": {
+          "name": "Beauty Sleep",
+          "images": [
+            {
+              "url": "https://i.scdn.co/image/ab67616d0000b27325920ac69f3ad8a4b6065167",
+              "height": 640,
+              "width": 640
+            }
+          ],
+          "release_date": "2026-09-23"
+        },
+        "external_urls": {
+          "spotify": "https://open.spotify.com/track/1RrEB90qVYRsVE1DQsqwuJ"
         }
       }
     ]
@@ -498,22 +498,6 @@ export const publicStats = {
         "popularity": 0
       },
       {
-        "id": "6LEeAFiJF8OuPx747e1wxR",
-        "name": "Blood Orange",
-        "images": [
-          {
-            "url": "https://i.scdn.co/image/ab6761610000e5eb82a833d61eafc09c05c24882",
-            "height": 640,
-            "width": 640
-          }
-        ],
-        "external_urls": {
-          "spotify": "https://open.spotify.com/artist/6LEeAFiJF8OuPx747e1wxR"
-        },
-        "genres": [],
-        "popularity": 0
-      },
-      {
         "id": "5DslL3PUa3BcRlCCEP64A4",
         "name": "The Hellp",
         "images": [
@@ -525,6 +509,22 @@ export const publicStats = {
         ],
         "external_urls": {
           "spotify": "https://open.spotify.com/artist/5DslL3PUa3BcRlCCEP64A4"
+        },
+        "genres": [],
+        "popularity": 0
+      },
+      {
+        "id": "6LEeAFiJF8OuPx747e1wxR",
+        "name": "Blood Orange",
+        "images": [
+          {
+            "url": "https://i.scdn.co/image/ab6761610000e5eb82a833d61eafc09c05c24882",
+            "height": 640,
+            "width": 640
+          }
+        ],
+        "external_urls": {
+          "spotify": "https://open.spotify.com/artist/6LEeAFiJF8OuPx747e1wxR"
         },
         "genres": [],
         "popularity": 0
