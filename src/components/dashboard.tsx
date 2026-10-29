@@ -3,13 +3,9 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useCallback, useEffect, useState, useEffectEvent } from "react";
-import {
-  AffinityBarChart,
-  DurationBarChart,
-  ExplicitPie,
-  MIX_COLORS,
-  StickyArtistsChart,
-} from "@/components/charts";
+import { ListeningClock } from "@/components/listening-clock";
+import { RecommendSong } from "@/components/recommend-song";
+import { formatSessionWhen } from "@/lib/listening-insights";
 import type { StatsPayload } from "@/lib/stats-payload";
 
 const RANGES = [
@@ -81,15 +77,16 @@ export function Dashboard({ initial }: { initial: StatsPayload }) {
   const mins = Math.floor(countdown / 60);
   const secs = String(countdown % 60).padStart(2, "0");
   const topArtist = data.artists[0];
+  const topTrack = data.tracks[0];
   const heroImage =
     topArtist?.images?.[0]?.url ||
-    data.tracks[0]?.album?.images?.[0]?.url ||
+    topTrack?.album?.images?.[0]?.url ||
     avatar;
+  const alwaysOn = data.alwaysOn.filter((a) => a.windows >= 2).slice(0, 6);
 
   return (
-    <main className="min-h-screen bg-canvas text-ink">
-      {/* Full-bleed Apple Music–style hero */}
-      <section className="relative min-h-[100svh] overflow-hidden bg-ink text-white">
+    <main className="min-h-screen bg-black text-white">
+      <section className="relative min-h-[100svh] overflow-hidden">
         {heroImage ? (
           <div className="absolute inset-0">
             <Image
@@ -98,61 +95,47 @@ export function Dashboard({ initial }: { initial: StatsPayload }) {
               fill
               priority
               unoptimized
-              className="hero-media object-cover object-center"
+              className="hero-media object-cover object-center opacity-55"
               sizes="100vw"
             />
             <div
               aria-hidden
               className="absolute inset-0"
-              style={{ background: "var(--hero-scrim)" }}
-            />
-            <div
-              aria-hidden
-              className="absolute inset-0 opacity-40"
               style={{
                 background:
-                  "radial-gradient(ellipse 80% 60% at 70% 20%, rgba(0,113,227,0.35), transparent 55%)",
+                  "linear-gradient(180deg, rgba(0,0,0,0.25) 0%, rgba(0,0,0,0.55) 40%, #000 100%)",
               }}
             />
           </div>
-        ) : (
-          <div
-            aria-hidden
-            className="absolute inset-0"
-            style={{
-              background:
-                "radial-gradient(ellipse 70% 50% at 50% 0%, #2c2c2e, #000)",
-            }}
-          />
-        )}
+        ) : null}
 
         <div className="relative z-10 mx-auto flex min-h-[100svh] max-w-[1120px] flex-col px-6 pb-16 pt-7 sm:px-10 sm:pb-20 sm:pt-9">
-          <header className="fade-in flex items-center justify-between">
+          <header className="flex items-center justify-between">
             <p className="text-[15px] font-semibold tracking-[-0.03em]">
               LiveStats
             </p>
-            <div className="flex items-center gap-3 text-[13px] text-white/70">
+            <div className="flex items-center gap-3 text-[13px] text-white/60">
               <span className="inline-flex items-center gap-2">
                 <span className="live-dot" />
                 {data.source === "live" ? "Live" : "Synced"}
               </span>
-              <span className="text-white/35">·</span>
-              <span className="tabular-nums text-white/55">
+              <span className="text-white/25">·</span>
+              <span className="tabular-nums text-white/45">
                 {updating ? "Updating" : `${mins}:${secs}`}
               </span>
             </div>
           </header>
 
-          <div className="mt-auto max-w-3xl pb-4 pt-24 sm:pt-32">
-            <p className="rise text-[13px] font-medium tracking-[0.16em] text-white/55 uppercase">
-              {data.profile.display_name}
+          <div className="mt-auto max-w-3xl pb-2 pt-24">
+            <p className="rise text-[13px] font-medium tracking-[0.16em] text-[#1ed760] uppercase">
+              {data.profile.display_name}&apos;s listening
             </p>
-            <h1 className="rise rise-1 mt-3 text-[clamp(3.75rem,14vw,7.5rem)] font-semibold leading-[0.9] tracking-[-0.06em]">
+            <h1 className="rise rise-1 mt-4 text-[clamp(3.25rem,12vw,7rem)] font-semibold leading-[0.9] tracking-[-0.06em]">
               LiveStats
             </h1>
-            <p className="rise rise-2 mt-6 max-w-md text-[18px] leading-snug tracking-[-0.015em] text-white/72 sm:text-[20px]">
-              Listening, affinity, and what sticks — {data.profile.display_name}
-              &apos;s Spotify, laid out like a product page.
+            <p className="rise rise-2 mt-5 max-w-md text-[18px] leading-snug text-white/70 sm:text-[20px]">
+              A portfolio Wrapped — what I play, when I listen, and what keeps
+              coming back.
             </p>
 
             <div className="rise rise-3 mt-10 flex flex-wrap items-center gap-3">
@@ -166,7 +149,7 @@ export function Dashboard({ initial }: { initial: StatsPayload }) {
                   unoptimized
                 />
               ) : null}
-              <div className="glass flex rounded-full p-1">
+              <div className="flex rounded-full bg-white/10 p-1 backdrop-blur-xl">
                 {RANGES.map((r) => {
                   const active = range === r.id;
                   return (
@@ -174,10 +157,10 @@ export function Dashboard({ initial }: { initial: StatsPayload }) {
                       key={r.id}
                       type="button"
                       onClick={() => changeRange(r.id)}
-                      className={`rounded-full px-4 py-2 text-[13px] font-medium tracking-[-0.01em] transition ${
+                      className={`rounded-full px-4 py-2 text-[13px] font-medium transition ${
                         active
-                          ? "bg-white text-ink"
-                          : "text-white/70 hover:text-white"
+                          ? "bg-white text-black"
+                          : "text-white/65 hover:text-white"
                       }`}
                     >
                       {r.label}
@@ -185,39 +168,29 @@ export function Dashboard({ initial }: { initial: StatsPayload }) {
                   );
                 })}
               </div>
-              <button
-                type="button"
-                onClick={() => load(range)}
-                className="text-[13px] font-medium text-white/80 underline-offset-4 hover:text-white hover:underline"
-              >
-                Refresh now
-              </button>
             </div>
 
-            <p className="rise rise-4 mt-6 text-[12px] text-white/45">
-              {topArtist
-                ? `Now leading: ${topArtist.name}`
-                : "Waiting on listening data"}{" "}
-              · Updated {formatFetchedAt(data.fetchedAt)} PT
+            <p className="rise rise-4 mt-6 text-[12px] text-white/40">
+              {topArtist ? `#1 artist: ${topArtist.name}` : "Loading tops"} ·
+              Updated {formatFetchedAt(data.fetchedAt)} PT
             </p>
           </div>
         </div>
       </section>
 
-      {/* Metrics — quiet Apple strip */}
-      <section className="border-b border-[var(--hairline)] bg-surface">
-        <div className="mx-auto grid max-w-[1120px] grid-cols-2 gap-x-8 gap-y-10 px-6 py-14 sm:grid-cols-4 sm:px-10 sm:py-20">
+      <section className="border-y border-white/10 bg-[#121212]">
+        <div className="mx-auto grid max-w-[1120px] grid-cols-2 gap-8 px-6 py-12 sm:grid-cols-4 sm:px-10 sm:py-16">
           {[
-            { label: "Artists", value: data.summary.topArtistCount },
-            { label: "Tracks", value: data.summary.topTrackCount },
-            { label: "Minutes", value: data.summary.topCatalogMinutes },
-            { label: "Sticky", value: data.summary.stickyArtists },
-          ].map((m, i) => (
-            <div key={m.label} className={`rise rise-${Math.min(i + 1, 4)}`}>
-              <p className="text-[12px] font-medium tracking-[0.08em] text-tertiary uppercase">
+            { label: "Top artists", value: data.summary.topArtistCount },
+            { label: "Top tracks", value: data.summary.topTrackCount },
+            { label: "Always on", value: data.summary.alwaysOnCount },
+            { label: "Sessions", value: data.summary.sessionCount },
+          ].map((m) => (
+            <div key={m.label}>
+              <p className="text-[12px] font-medium tracking-[0.08em] text-white/40 uppercase">
                 {m.label}
               </p>
-              <p className="mt-2 text-[44px] font-semibold leading-none tracking-[-0.055em] sm:text-[52px]">
+              <p className="mt-2 text-[40px] font-semibold leading-none tracking-[-0.05em] sm:text-[48px]">
                 {m.value}
               </p>
             </div>
@@ -225,201 +198,254 @@ export function Dashboard({ initial }: { initial: StatsPayload }) {
         </div>
       </section>
 
-      {/* Charts */}
-      <section className="mx-auto max-w-[1120px] px-6 py-20 sm:px-10 sm:py-28">
-        <div className="rise mb-16 max-w-xl">
-          <h2 className="text-[34px] font-semibold tracking-[-0.045em] sm:text-[44px]">
-            The mix
-          </h2>
-          <p className="mt-3 text-[17px] leading-relaxed text-secondary">
-            Rank affinity, catalog shape, and retention across{" "}
-            {data.rangeLabel.toLowerCase()} — the signals behind Wrapped,
-            readable at a glance.
+      <section className="bg-[#f037a5] px-6 py-20 text-black sm:px-10 sm:py-28">
+        <div className="mx-auto max-w-[1120px]">
+          <p className="text-[13px] font-semibold tracking-[0.14em] uppercase opacity-70">
+            {data.rangeLabel}
           </p>
+          <h2 className="mt-3 text-[clamp(2.25rem,6vw,3.75rem)] font-semibold tracking-[-0.05em]">
+            Top artists
+          </h2>
+          <ol className="mt-12 space-y-5">
+            {data.artists.map((artist, i) => (
+              <li key={artist.id} className="flex items-center gap-4 sm:gap-6">
+                <span className="w-10 text-[28px] font-semibold tracking-[-0.04em] tabular-nums opacity-80 sm:w-14 sm:text-[36px]">
+                  {i + 1}
+                </span>
+                {artist.images?.[0]?.url ? (
+                  <Image
+                    src={artist.images[0].url}
+                    alt=""
+                    width={72}
+                    height={72}
+                    className="h-14 w-14 rounded-full object-cover sm:h-[72px] sm:w-[72px]"
+                    unoptimized
+                  />
+                ) : (
+                  <div className="flex h-14 w-14 items-center justify-center rounded-full bg-black/15 text-lg font-semibold sm:h-[72px] sm:w-[72px]">
+                    {artist.name.slice(0, 1)}
+                  </div>
+                )}
+                <a
+                  href={artist.external_urls?.spotify}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="truncate text-[22px] font-semibold tracking-[-0.03em] sm:text-[28px]"
+                >
+                  {artist.name}
+                </a>
+              </li>
+            ))}
+          </ol>
         </div>
-
-        {data.artists.length === 0 ? (
-          <div className="rounded-[28px] bg-well px-8 py-16 text-center">
-            <p className="text-[17px] font-medium tracking-[-0.02em]">
-              No listening data for this window yet
-            </p>
-            <p className="mt-2 text-[14px] text-secondary">
-              Connect live refresh from the owner page, or sync a fresh snapshot.
-            </p>
-            <Link
-              href="/owner"
-              className="mt-6 inline-block text-[14px] font-medium text-blue hover:opacity-70"
-            >
-              Connect Spotify →
-            </Link>
-          </div>
-        ) : (
-          <div className="grid gap-5 lg:grid-cols-2">
-            <figure className="rise rise-1 chart-well rounded-[28px] p-6 sm:p-8">
-              <figcaption className="mb-6">
-                <h3 className="text-[17px] font-semibold tracking-[-0.02em]">
-                  Artist affinity
-                </h3>
-                <p className="mt-1 text-[13px] text-tertiary">
-                  Higher bar = stronger rank
-                </p>
-              </figcaption>
-              <AffinityBarChart data={data.affinity} />
-            </figure>
-
-            <figure className="rise rise-2 chart-well rounded-[28px] p-6 sm:p-8">
-              <figcaption className="mb-6">
-                <h3 className="text-[17px] font-semibold tracking-[-0.02em]">
-                  Track length
-                </h3>
-                <p className="mt-1 text-[13px] text-tertiary">
-                  Duration of each top track
-                </p>
-              </figcaption>
-              <DurationBarChart data={data.durations} />
-            </figure>
-
-            <figure className="rise rise-3 chart-well rounded-[28px] p-6 sm:p-8">
-              <figcaption className="mb-6">
-                <h3 className="text-[17px] font-semibold tracking-[-0.02em]">
-                  Artists that stick
-                </h3>
-                <p className="mt-1 text-[13px] text-tertiary">
-                  Appearances across time windows
-                </p>
-              </figcaption>
-              <StickyArtistsChart data={data.sticky} />
-            </figure>
-
-            <figure className="rise rise-4 chart-well rounded-[28px] p-6 sm:p-8">
-              <figcaption className="mb-6">
-                <h3 className="text-[17px] font-semibold tracking-[-0.02em]">
-                  Explicit vs clean
-                </h3>
-                <p className="mt-1 text-[13px] text-tertiary">
-                  Content flags on top tracks
-                </p>
-              </figcaption>
-              <ExplicitPie data={data.mix} />
-              <div className="mt-2 flex justify-center gap-7 text-[13px] text-secondary">
-                {data.mix.map((m) => (
-                  <span key={m.name} className="inline-flex items-center gap-2">
-                    <span
-                      className="inline-block h-2.5 w-2.5 rounded-full"
-                      style={{ background: MIX_COLORS[m.name] ?? "#86868b" }}
-                    />
-                    {m.name}
-                    <span className="tabular-nums text-ink">{m.value}</span>
-                  </span>
-                ))}
-              </div>
-            </figure>
-          </div>
-        )}
       </section>
 
-      {/* Editorial lists */}
-      <section className="border-t border-[var(--hairline)] bg-surface">
-        <div className="mx-auto grid max-w-[1120px] gap-16 px-6 py-20 sm:px-10 sm:py-28 lg:grid-cols-2 lg:gap-24">
-          <div className="rise rise-1">
-            <h2 className="text-[28px] font-semibold tracking-[-0.04em] sm:text-[32px]">
-              Top artists
-            </h2>
-            <ol className="mt-10">
-              {data.artists.length === 0 ? (
-                <li className="py-4 text-[15px] text-tertiary">No artists yet</li>
-              ) : (
-                data.artists.map((artist, i) => (
-                  <li
-                    key={artist.id}
-                    className="group flex items-center gap-4 border-b border-[var(--hairline)] py-4 first:pt-0"
+      <section className="bg-[#4a90e2] px-6 py-20 text-black sm:px-10 sm:py-28">
+        <div className="mx-auto max-w-[1120px]">
+          <p className="text-[13px] font-semibold tracking-[0.14em] uppercase opacity-70">
+            Heavy rotation
+          </p>
+          <h2 className="mt-3 text-[clamp(2.25rem,6vw,3.75rem)] font-semibold tracking-[-0.05em]">
+            Top tracks
+          </h2>
+          <ol className="mt-12 space-y-4">
+            {data.tracks.map((track, i) => (
+              <li key={track.id} className="flex items-center gap-4 sm:gap-5">
+                <span className="w-8 text-[20px] font-semibold tabular-nums opacity-75 sm:w-10">
+                  {i + 1}
+                </span>
+                {track.album?.images?.[0]?.url ? (
+                  <Image
+                    src={track.album.images[0].url}
+                    alt=""
+                    width={56}
+                    height={56}
+                    className="h-12 w-12 rounded-md object-cover sm:h-14 sm:w-14"
+                    unoptimized
+                  />
+                ) : (
+                  <div className="h-12 w-12 rounded-md bg-black/15 sm:h-14 sm:w-14" />
+                )}
+                <div className="min-w-0">
+                  <a
+                    href={track.external_urls?.spotify}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="block truncate text-[18px] font-semibold tracking-[-0.02em] sm:text-[22px]"
                   >
-                    <span className="w-7 text-[13px] tabular-nums text-tertiary">
-                      {String(i + 1).padStart(2, "0")}
-                    </span>
-                    {artist.images?.[0]?.url ? (
-                      <Image
-                        src={artist.images[0].url}
-                        alt=""
-                        width={52}
-                        height={52}
-                        className="h-[52px] w-[52px] rounded-full object-cover transition duration-500 group-hover:scale-[1.03]"
-                        unoptimized
-                      />
-                    ) : (
-                      <div className="flex h-[52px] w-[52px] items-center justify-center rounded-full bg-well text-sm font-medium">
-                        {artist.name.slice(0, 1)}
-                      </div>
-                    )}
+                    {track.name}
+                  </a>
+                  <p className="truncate text-[14px] opacity-70">
+                    {track.artists.map((a) => a.name).join(", ")}
+                  </p>
+                </div>
+              </li>
+            ))}
+          </ol>
+        </div>
+      </section>
+
+      <section className="bg-[#ff6437] px-6 py-20 text-black sm:px-10 sm:py-28">
+        <div className="mx-auto max-w-[1120px]">
+          <p className="text-[13px] font-semibold tracking-[0.14em] uppercase opacity-70">
+            Not a one-month fling
+          </p>
+          <h2 className="mt-3 max-w-2xl text-[clamp(2.25rem,6vw,3.75rem)] font-semibold tracking-[-0.05em]">
+            Always in rotation
+          </h2>
+          <p className="mt-4 max-w-xl text-[17px] leading-relaxed opacity-80">
+            Artists that show up across more than one window — last 4 weeks, 6
+            months, and all time. The ones that stick around.
+          </p>
+          {alwaysOn.length === 0 ? (
+            <p className="mt-10 text-[16px] opacity-70">
+              Not enough overlap across windows yet.
+            </p>
+          ) : (
+            <ul className="mt-12 grid gap-4 sm:grid-cols-2">
+              {alwaysOn.map((a) => (
+                <li
+                  key={a.fullName}
+                  className="rounded-3xl bg-black/10 px-5 py-5"
+                >
+                  <p className="text-[22px] font-semibold tracking-[-0.03em]">
+                    {a.fullName}
+                  </p>
+                  <p className="mt-1 text-[14px] opacity-75">
+                    In {a.windows}/3 windows · {a.labels}
+                  </p>
+                </li>
+              ))}
+            </ul>
+          )}
+        </div>
+      </section>
+
+      <section className="bg-[#121212] px-6 py-20 sm:px-10 sm:py-28">
+        <div className="mx-auto max-w-[1120px]">
+          <p className="text-[13px] font-medium tracking-[0.14em] text-[#1ed760] uppercase">
+            Habits
+          </p>
+          <h2 className="mt-3 text-[clamp(2rem,5vw,3.25rem)] font-semibold tracking-[-0.045em]">
+            When I listen
+          </h2>
+          <p className="mt-3 max-w-lg text-[16px] text-white/55">
+            From recent plays, in Pacific time — the hours this page sees me
+            press play.
+          </p>
+          <div className="mt-10 rounded-[28px] bg-white/[0.04] p-6 ring-1 ring-white/10 sm:p-8">
+            <ListeningClock
+              hours={data.clock.hours}
+              peakLabel={data.clock.peakLabel}
+            />
+          </div>
+        </div>
+      </section>
+
+      <section className="border-t border-white/10 bg-black px-6 py-20 sm:px-10 sm:py-28">
+        <div className="mx-auto max-w-[1120px]">
+          <p className="text-[13px] font-medium tracking-[0.14em] text-[#1ed760] uppercase">
+            Lately
+          </p>
+          <h2 className="mt-3 text-[clamp(2rem,5vw,3.25rem)] font-semibold tracking-[-0.045em]">
+            Listening sessions
+          </h2>
+          <p className="mt-3 max-w-lg text-[16px] text-white/55">
+            Chunks of recent listening — a new session starts after about 30
+            quiet minutes.
+          </p>
+          {data.sessions.length === 0 ? (
+            <p className="mt-10 text-[15px] text-white/45">
+              No recent sessions in the Spotify feed yet. They show up after a
+              few plays with the live connection on.
+            </p>
+          ) : (
+            <ul className="mt-10 divide-y divide-white/10">
+              {data.sessions.map((s) => (
+                <li
+                  key={s.id}
+                  className="flex flex-wrap items-baseline justify-between gap-3 py-5"
+                >
+                  <div>
+                    <p className="text-[18px] font-medium tracking-[-0.02em]">
+                      {s.minutes} min · {s.headline}
+                    </p>
+                    <p className="mt-1 text-[13px] text-white/40">
+                      {formatSessionWhen(s.startedAt)} · {s.trackCount} tracks
+                    </p>
+                  </div>
+                </li>
+              ))}
+            </ul>
+          )}
+        </div>
+      </section>
+
+      <section className="bg-[#1ed760] px-6 py-20 text-black sm:px-10 sm:py-28">
+        <div className="mx-auto max-w-[1120px]">
+          <p className="text-[13px] font-semibold tracking-[0.14em] uppercase opacity-70">
+            Can&apos;t skip it
+          </p>
+          <h2 className="mt-3 text-[clamp(2.25rem,6vw,3.75rem)] font-semibold tracking-[-0.05em]">
+            On repeat
+          </h2>
+          <p className="mt-4 max-w-xl text-[17px] leading-relaxed opacity-80">
+            Songs that showed up more than once in recent plays — real replays,
+            not just a top list.
+          </p>
+          {data.repeats.length === 0 ? (
+            <p className="mt-10 text-[16px] opacity-70">
+              No repeats in the recent window yet.
+            </p>
+          ) : (
+            <ol className="mt-12 space-y-4">
+              {data.repeats.map((t, i) => (
+                <li key={t.id} className="flex items-center gap-4">
+                  <span className="w-8 text-[20px] font-semibold tabular-nums opacity-75">
+                    {i + 1}
+                  </span>
+                  {t.imageUrl ? (
+                    <Image
+                      src={t.imageUrl}
+                      alt=""
+                      width={56}
+                      height={56}
+                      className="h-14 w-14 rounded-md object-cover"
+                      unoptimized
+                    />
+                  ) : (
+                    <div className="h-14 w-14 rounded-md bg-black/15" />
+                  )}
+                  <div className="min-w-0 flex-1">
                     <a
-                      href={artist.external_urls?.spotify}
+                      href={t.spotifyUrl}
                       target="_blank"
                       rel="noreferrer"
-                      className="truncate text-[17px] font-medium tracking-[-0.02em] transition hover:text-blue"
+                      className="block truncate text-[18px] font-semibold tracking-[-0.02em]"
                     >
-                      {artist.name}
+                      {t.name}
                     </a>
-                  </li>
-                ))
-              )}
+                    <p className="truncate text-[14px] opacity-70">{t.artists}</p>
+                  </div>
+                  <p className="text-[18px] font-semibold tabular-nums">
+                    ×{t.plays}
+                  </p>
+                </li>
+              ))}
             </ol>
-          </div>
-
-          <div className="rise rise-2">
-            <h2 className="text-[28px] font-semibold tracking-[-0.04em] sm:text-[32px]">
-              Top tracks
-            </h2>
-            <ol className="mt-10">
-              {data.tracks.length === 0 ? (
-                <li className="py-4 text-[15px] text-tertiary">No tracks yet</li>
-              ) : (
-                data.tracks.map((track, i) => (
-                  <li
-                    key={track.id}
-                    className="group flex items-center gap-4 border-b border-[var(--hairline)] py-4 first:pt-0"
-                  >
-                    <span className="w-7 text-[13px] tabular-nums text-tertiary">
-                      {String(i + 1).padStart(2, "0")}
-                    </span>
-                    {track.album?.images?.[0]?.url ? (
-                      <Image
-                        src={track.album.images[0].url}
-                        alt=""
-                        width={52}
-                        height={52}
-                        className="h-[52px] w-[52px] rounded-[12px] object-cover transition duration-500 group-hover:scale-[1.03]"
-                        unoptimized
-                      />
-                    ) : (
-                      <div className="flex h-[52px] w-[52px] items-center justify-center rounded-[12px] bg-well text-sm font-medium">
-                        {track.name.slice(0, 1)}
-                      </div>
-                    )}
-                    <div className="min-w-0">
-                      <a
-                        href={track.external_urls?.spotify}
-                        target="_blank"
-                        rel="noreferrer"
-                        className="block truncate text-[17px] font-medium tracking-[-0.02em] transition hover:text-blue"
-                      >
-                        {track.name}
-                      </a>
-                      <p className="truncate text-[13px] text-tertiary">
-                        {track.artists.map((a) => a.name).join(", ")}
-                      </p>
-                    </div>
-                  </li>
-                ))
-              )}
-            </ol>
-          </div>
+          )}
         </div>
       </section>
 
-      <footer className="mx-auto flex max-w-[1120px] flex-wrap items-center justify-between gap-3 px-6 py-12 text-[13px] text-tertiary sm:px-10">
-        <p>Personal Spotify analytics · portfolio</p>
-        <Link href="/owner" className="font-medium text-blue hover:opacity-70">
-          Connect live refresh
+      <RecommendSong />
+
+      <footer className="mx-auto flex max-w-[1120px] flex-wrap items-center justify-between gap-3 px-6 py-12 text-[13px] text-white/40 sm:px-10">
+        <p>Dereck · personal listening portfolio</p>
+        <Link
+          href="/owner"
+          className="font-medium text-[#1ed760] hover:opacity-80"
+        >
+          Owner sync
         </Link>
       </footer>
     </main>

@@ -167,9 +167,40 @@ export async function getTopTracks(
 
 export async function getRecentlyPlayed(accessToken: string) {
   return spotifyFetch<{ items: PlayHistoryItem[] }>(
-    "/me/player/recently-played?limit=20",
+    "/me/player/recently-played?limit=50",
     accessToken,
   );
+}
+
+/** App-only token for public search (recommend-a-song). */
+export async function getClientCredentialsToken() {
+  const body = new URLSearchParams({ grant_type: "client_credentials" });
+  const res = await fetch(TOKEN_URL, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/x-www-form-urlencoded",
+      Authorization: basicAuth(),
+    },
+    body,
+  });
+  if (!res.ok) {
+    const text = await res.text();
+    throw new Error(`Client credentials failed: ${res.status} ${text}`);
+  }
+  return res.json() as Promise<{ access_token: string; expires_in: number }>;
+}
+
+export async function searchTracks(accessToken: string, q: string) {
+  const params = new URLSearchParams({
+    q,
+    type: "track",
+    limit: "8",
+  });
+  return spotifyFetch<{
+    tracks: {
+      items: SpotifyTrack[];
+    };
+  }>(`/search?${params}`, accessToken);
 }
 
 export async function ensureFreshSession(

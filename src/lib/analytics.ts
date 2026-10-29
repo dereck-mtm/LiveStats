@@ -35,7 +35,17 @@ type Snapshot = {
   short_term: { artists: Artist[]; tracks: Track[] };
   medium_term: { artists: Artist[]; tracks: Track[] };
   long_term: { artists: Artist[]; tracks: Track[] };
-  recent: unknown[];
+  recent: {
+    played_at?: string;
+    track?: {
+      id: string;
+      name: string;
+      duration_ms: number;
+      artists: { name: string }[];
+      album?: { images?: { url: string }[] };
+      external_urls?: { spotify?: string };
+    };
+  }[];
 };
 
 const snap = publicStats as unknown as Snapshot;
@@ -53,6 +63,20 @@ export function getRangeBundle(range: StatsRange) {
     artists: bucket?.artists ?? [],
     tracks: bucket?.tracks ?? [],
   };
+}
+
+export function getSnapshotRecent() {
+  return (snap.recent || []) as {
+    played_at?: string;
+    track?: {
+      id: string;
+      name: string;
+      duration_ms: number;
+      artists: { name: string }[];
+      album?: { images?: { url: string }[] };
+      external_urls?: { spotify?: string };
+    };
+  }[];
 }
 
 /** Affinity score from list rank (1st = 10 … 10th = 1). */

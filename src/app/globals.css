@@ -1,21 +1,17 @@
 @import "tailwindcss";
 
 :root {
-  --canvas: #f5f5f7;
-  --surface: #ffffff;
-  --well: #ebebed;
-  --ink: #1d1d1f;
-  --secondary: #6e6e73;
-  --tertiary: #86868b;
-  --hairline: rgba(0, 0, 0, 0.08);
-  --blue: #0071e3;
-  --green: #30d158;
-  --hero-scrim: linear-gradient(
-    180deg,
-    rgba(0, 0, 0, 0.35) 0%,
-    rgba(0, 0, 0, 0.55) 45%,
-    rgba(0, 0, 0, 0.92) 100%
-  );
+  --canvas: #000000;
+  --surface: #121212;
+  --well: #181818;
+  --ink: #ffffff;
+  --secondary: rgba(255, 255, 255, 0.7);
+  --tertiary: rgba(255, 255, 255, 0.45);
+  --hairline: rgba(255, 255, 255, 0.08);
+  --spot: #1ed760;
+  --wrapped-pink: #f037a5;
+  --wrapped-blue: #4a90e2;
+  --wrapped-orange: #ff6437;
   --background: var(--canvas);
   --foreground: var(--ink);
 }
@@ -29,8 +25,10 @@
   --color-ink: var(--ink);
   --color-secondary: var(--secondary);
   --color-tertiary: var(--tertiary);
-  --color-blue: var(--blue);
-  --color-green: var(--green);
+  --color-spot: var(--spot);
+  --color-wrapped-pink: var(--wrapped-pink);
+  --color-wrapped-blue: var(--wrapped-blue);
+  --color-wrapped-orange: var(--wrapped-orange);
   --font-sans: var(--font-geist);
   --font-display: var(--font-geist);
 }
@@ -54,28 +52,17 @@ body {
 }
 
 ::selection {
-  background: rgba(0, 113, 227, 0.18);
+  background: rgba(30, 215, 96, 0.35);
 }
 
 @keyframes rise {
   from {
     opacity: 0;
-    transform: translateY(20px);
-    filter: blur(6px);
+    transform: translateY(18px);
   }
   to {
     opacity: 1;
     transform: translateY(0);
-    filter: blur(0);
-  }
-}
-
-@keyframes fade-in {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
   }
 }
 
@@ -91,7 +78,7 @@ body {
 
 @keyframes kenburns {
   from {
-    transform: scale(1.08);
+    transform: scale(1.1);
   }
   to {
     transform: scale(1);
@@ -99,47 +86,30 @@ body {
 }
 
 .rise {
-  animation: rise 0.9s cubic-bezier(0.16, 1, 0.3, 1) both;
+  animation: rise 0.85s cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 .rise-1 {
-  animation-delay: 0.1s;
+  animation-delay: 0.08s;
 }
 .rise-2 {
-  animation-delay: 0.2s;
+  animation-delay: 0.16s;
 }
 .rise-3 {
-  animation-delay: 0.32s;
+  animation-delay: 0.28s;
 }
 .rise-4 {
-  animation-delay: 0.44s;
-}
-
-.fade-in {
-  animation: fade-in 1.2s ease both;
+  animation-delay: 0.4s;
 }
 
 .live-dot {
   width: 7px;
   height: 7px;
   border-radius: 999px;
-  background: var(--green);
-  box-shadow: 0 0 0 3px rgba(48, 209, 88, 0.22);
+  background: var(--spot);
+  box-shadow: 0 0 0 3px rgba(30, 215, 96, 0.22);
   animation: soft-pulse 2.4s ease-in-out infinite;
 }
 
 .hero-media {
-  animation: kenburns 18s ease-out both;
-}
-
-.glass {
-  background: rgba(255, 255, 255, 0.12);
-  backdrop-filter: blur(24px) saturate(1.4);
-  -webkit-backdrop-filter: blur(24px) saturate(1.4);
-  border: 1px solid rgba(255, 255, 255, 0.18);
-}
-
-.chart-well {
-  background: var(--surface);
-  border: 1px solid var(--hairline);
-  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.7) inset;
+  animation: kenburns 16s ease-out both;
 }

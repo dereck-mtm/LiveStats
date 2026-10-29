@@ -1,13 +1,17 @@
 import {
-  artistAffinityChart,
   crossPeriodArtists,
-  explicitMix,
   getRangeBundle,
   getSnapshotMeta,
+  getSnapshotRecent,
   RANGE_LABEL,
   summaryStats,
-  trackDurationChart,
 } from "@/lib/analytics";
+import {
+  buildListeningClock,
+  buildRepeats,
+  buildSessions,
+  type RecentPlay,
+} from "@/lib/listening-insights";
 import { isStatsRange, type StatsRange } from "@/lib/load-stats";
 import {
   getProfile,
@@ -27,20 +31,60 @@ export type StatsPayload = {
     display_name: string;
     images: { url: string; height?: number | null; width?: number | null }[];
   };
-  summary: ReturnType<typeof summaryStats>;
-  affinity: ReturnType<typeof artistAffinityChart>;
-  durations: ReturnType<typeof trackDurationChart>;
-  sticky: ReturnType<typeof crossPeriodArtists>;
-  mix: ReturnType<typeof explicitMix>;
+  summary: {
+    topArtistCount: number;
+    topTrackCount: number;
+    alwaysOnCount: number;
+    sessionCount: number;
+    peakHourLabel: string | null;
+  };
+  /** Artists that appear across multiple time windows — "always in rotation". */
+  alwaysOn: ReturnType<typeof crossPeriodArtists>;
   artists: ReturnType<typeof getRangeBundle>["artists"];
   tracks: ReturnType<typeof getRangeBundle>["tracks"];
+  sessions: ReturnType<typeof buildSessions>;
+  clock: ReturnType<typeof buildListeningClock>;
+  repeats: ReturnType<typeof buildRepeats>;
 };
 
 const REFRESH_SECONDS = 600;
 
+function normalizeRecent(
+  items: {
+    played_at?: string;
+    track?: RecentPlay["track"] | null;
+  }[],
+): RecentPlay[] {
+  return items
+    .filter((i): i is RecentPlay => Boolean(i?.played_at && i?.track?.id))
+    .map((i) => ({
+      played_at: i.played_at,
+      track: {
+        id: i.track.id,
+        name: i.track.name,
+        duration_ms: i.track.duration_ms ?? 0,
+        artists: i.track.artists || [],
+        album: i.track.album,
+        external_urls: i.track.external_urls,
+      },
+    }));
+}
+
+function buildInsights(recent: RecentPlay[]) {
+  const sessions = buildSessions(recent);
+  const clock = buildListeningClock(recent);
+  const repeats = buildRepeats(recent);
+  return { sessions, clock, repeats };
+}
+
 function fromSnapshot(range: StatsRange): StatsPayload {
   const meta = getSnapshotMeta();
   const bundle = getRangeBundle(range);
+  const alwaysOn = crossPeriodArtists();
+  const recent = normalizeRecent(getSnapshotRecent());
+  const insights = buildInsights(recent);
+  const base = summaryStats(range);
+
   return {
     range,
     rangeLabel: RANGE_LABEL[range],
@@ -48,13 +92,17 @@ function fromSnapshot(range: StatsRange): StatsPayload {
     fetchedAt: meta.fetchedAt,
     nextRefreshSec: REFRESH_SECONDS,
     profile: meta.profile,
-    summary: summaryStats(range),
-    affinity: artistAffinityChart(range),
-    durations: trackDurationChart(range),
-    sticky: crossPeriodArtists(),
-    mix: explicitMix(range),
+    summary: {
+      topArtistCount: base.topArtistCount,
+      topTrackCount: base.topTrackCount,
+      alwaysOnCount: alwaysOn.filter((a) => a.windows >= 2).length,
+      sessionCount: insights.sessions.length,
+      peakHourLabel: insights.clock.peakLabel,
+    },
+    alwaysOn,
     artists: bundle.artists,
     tracks: bundle.tracks,
+    ...insights,
   };
 }
 
@@ -71,14 +119,15 @@ async function fromLive(range: StatsRange): Promise<StatsPayload | null> {
   try {
     const tokens = await refreshAccessToken(refresh);
     const token = tokens.access_token;
-    const [profile, artistsRes, tracksRes] = await Promise.all([
+    const [profile, artistsRes, tracksRes, recentRes] = await Promise.all([
       getProfile(token),
       getTopArtists(token, range),
       getTopTracks(token, range),
+      getRecentlyPlayed(token).catch(() => ({ items: [] as Awaited<
+        ReturnType<typeof getRecentlyPlayed>
+      >["items"] })),
     ]);
-    await getRecentlyPlayed(token).catch(() => null);
 
-    // Build chart inputs from live lists (rank-based affinity)
     const artists = artistsRes.items.map((a) => ({
       ...a,
       genres: a.genres ?? [],
@@ -90,27 +139,9 @@ async function fromLive(range: StatsRange): Promise<StatsPayload | null> {
       duration_ms: t.duration_ms ?? 0,
     }));
 
-    const affinity = artists.map((a, i) => ({
-      name: a.name.length > 14 ? a.name.slice(0, 13) + "…" : a.name,
-      fullName: a.name,
-      affinity: Math.max(artists.length - i, 1),
-      rank: i + 1,
-    }));
-    const durations = tracks.map((t, i) => ({
-      name: t.name.length > 16 ? t.name.slice(0, 15) + "…" : t.name,
-      fullName: t.name,
-      minutes: Math.round((t.duration_ms / 60000) * 10) / 10,
-      rank: i + 1,
-    }));
-    const explicit = tracks.filter((t) => t.explicit).length;
-    const mix = [
-      { name: "Explicit", value: explicit },
-      { name: "Clean", value: tracks.length - explicit },
-    ].filter((d) => d.value > 0);
-
-    const totalMin = Math.round(
-      tracks.reduce((s, t) => s + t.duration_ms, 0) / 60000,
-    );
+    const recent = normalizeRecent(recentRes.items || []);
+    const insights = buildInsights(recent);
+    const alwaysOn = crossPeriodArtists();
 
     return {
       range,
@@ -125,17 +156,14 @@ async function fromLive(range: StatsRange): Promise<StatsPayload | null> {
       summary: {
         topArtistCount: artists.length,
         topTrackCount: tracks.length,
-        topCatalogMinutes: totalMin,
-        trackArtistSpread: new Set(tracks.flatMap((t) => t.artists.map((a) => a.name)))
-          .size,
-        stickyArtists: crossPeriodArtists().filter((a) => a.windows >= 2).length,
+        alwaysOnCount: alwaysOn.filter((a) => a.windows >= 2).length,
+        sessionCount: insights.sessions.length,
+        peakHourLabel: insights.clock.peakLabel,
       },
-      affinity,
-      durations,
-      sticky: crossPeriodArtists(),
-      mix,
+      alwaysOn,
       artists,
       tracks,
+      ...insights,
     };
   } catch {
     return null;

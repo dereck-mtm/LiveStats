@@ -116,7 +116,7 @@ for (const range of ranges) {
 }
 
 try {
-  const recent = await api(token, "/v1/me/player/recently-played?limit=20");
+  const recent = await api(token, "/v1/me/player/recently-played?limit=50");
   snapshot.recent = (recent.items || []).map((item) => ({
     played_at: item.played_at,
     track: item.track ? normalizeTrack(item.track) : undefined,
