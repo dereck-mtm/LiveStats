@@ -44,3 +44,8 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 .data/
+
+CALL_CREATE_ARGS.json
+CREATE_FINAL.json
+CREATE_PS_ONLY.json
+
