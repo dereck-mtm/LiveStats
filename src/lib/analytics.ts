@@ -114,8 +114,14 @@ export function explicitMix(range: StatsRange) {
   ].filter((d) => d.value > 0);
 }
 
-/** Artists appearing in multiple time windows — retention signal. */
-export function crossPeriodArtists() {
+type NamedArtist = { id: string; name: string };
+
+/** Artists appearing in multiple time windows — “always in rotation”. */
+export function crossPeriodFromLists(lists: {
+  short_term: NamedArtist[];
+  medium_term: NamedArtist[];
+  long_term: NamedArtist[];
+}) {
   const windows: StatsRange[] = ["short_term", "medium_term", "long_term"];
   const map = new Map<
     string,
@@ -123,7 +129,7 @@ export function crossPeriodArtists() {
   >();
 
   for (const w of windows) {
-    getRangeBundle(w).artists.forEach((a, i) => {
+    (lists[w] || []).forEach((a, i) => {
       const cur = map.get(a.id) || {
         name: a.name,
         windows: [],
@@ -148,6 +154,14 @@ export function crossPeriodArtists() {
         .join("+"),
     }))
     .sort((a, b) => b.windows - a.windows || a.bestRank - b.bestRank);
+}
+
+export function crossPeriodArtists() {
+  return crossPeriodFromLists({
+    short_term: getRangeBundle("short_term").artists,
+    medium_term: getRangeBundle("medium_term").artists,
+    long_term: getRangeBundle("long_term").artists,
+  });
 }
 
 export function summaryStats(range: StatsRange) {

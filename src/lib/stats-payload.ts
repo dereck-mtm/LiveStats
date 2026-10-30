@@ -1,5 +1,6 @@
 import {
   crossPeriodArtists,
+  crossPeriodFromLists,
   getRangeBundle,
   getSnapshotMeta,
   getSnapshotRecent,
@@ -119,13 +120,24 @@ async function fromLive(range: StatsRange): Promise<StatsPayload | null> {
   try {
     const tokens = await refreshAccessToken(refresh);
     const token = tokens.access_token;
-    const [profile, artistsRes, tracksRes, recentRes] = await Promise.all([
+    const [
+      profile,
+      artistsRes,
+      tracksRes,
+      recentRes,
+      shortArtists,
+      mediumArtists,
+      longArtists,
+    ] = await Promise.all([
       getProfile(token),
       getTopArtists(token, range),
       getTopTracks(token, range),
       getRecentlyPlayed(token).catch(() => ({ items: [] as Awaited<
         ReturnType<typeof getRecentlyPlayed>
       >["items"] })),
+      getTopArtists(token, "short_term"),
+      getTopArtists(token, "medium_term"),
+      getTopArtists(token, "long_term"),
     ]);
 
     const artists = artistsRes.items.map((a) => ({
@@ -141,7 +153,11 @@ async function fromLive(range: StatsRange): Promise<StatsPayload | null> {
 
     const recent = normalizeRecent(recentRes.items || []);
     const insights = buildInsights(recent);
-    const alwaysOn = crossPeriodArtists();
+    const alwaysOn = crossPeriodFromLists({
+      short_term: shortArtists.items,
+      medium_term: mediumArtists.items,
+      long_term: longArtists.items,
+    });
 
     return {
       range,
