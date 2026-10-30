@@ -5,6 +5,7 @@ import Link from "next/link";
 import { useCallback, useEffect, useState, useEffectEvent } from "react";
 import { ListeningClock } from "@/components/listening-clock";
 import { RecommendSong } from "@/components/recommend-song";
+import { SectionNav } from "@/components/section-nav";
 import { formatSessionWhen } from "@/lib/listening-insights";
 import type { StatsPayload } from "@/lib/stats-payload";
 
@@ -86,7 +87,12 @@ export function Dashboard({ initial }: { initial: StatsPayload }) {
 
   return (
     <main className="min-h-screen bg-black text-white">
-      <section className="relative min-h-[100svh] overflow-hidden">
+      <SectionNav />
+
+      <section
+        id="overview"
+        className="relative min-h-[100svh] scroll-mt-16 overflow-hidden"
+      >
         {heroImage ? (
           <div className="absolute inset-0">
             <Image
@@ -109,7 +115,7 @@ export function Dashboard({ initial }: { initial: StatsPayload }) {
           </div>
         ) : null}
 
-        <div className="relative z-10 mx-auto flex min-h-[100svh] max-w-[1120px] flex-col px-6 pb-16 pt-7 sm:px-10 sm:pb-20 sm:pt-9">
+        <div className="relative z-10 mx-auto flex min-h-[100svh] max-w-[1120px] flex-col px-6 pb-16 pt-20 sm:px-10 sm:pb-20 sm:pt-24">
           <header className="flex items-center justify-between">
             <p className="text-[15px] font-semibold tracking-[-0.03em]">
               LiveStats
@@ -178,7 +184,10 @@ export function Dashboard({ initial }: { initial: StatsPayload }) {
         </div>
       </section>
 
-      <section className="border-y border-white/10 bg-[#121212]">
+      <section
+        aria-label="Highlights"
+        className="border-y border-white/10 bg-[#121212]"
+      >
         <div className="mx-auto grid max-w-[1120px] grid-cols-2 gap-8 px-6 py-12 sm:grid-cols-4 sm:px-10 sm:py-16">
           {[
             { label: "Top artists", value: data.summary.topArtistCount },
@@ -198,7 +207,10 @@ export function Dashboard({ initial }: { initial: StatsPayload }) {
         </div>
       </section>
 
-      <section className="bg-[#f037a5] px-6 py-20 text-black sm:px-10 sm:py-28">
+      <section
+        id="artists"
+        className="scroll-mt-16 bg-[#f037a5] px-6 py-20 text-black sm:px-10 sm:py-28"
+      >
         <div className="mx-auto max-w-[1120px]">
           <p className="text-[13px] font-semibold tracking-[0.14em] uppercase opacity-70">
             {data.rangeLabel}
@@ -240,7 +252,10 @@ export function Dashboard({ initial }: { initial: StatsPayload }) {
         </div>
       </section>
 
-      <section className="bg-[#4a90e2] px-6 py-20 text-black sm:px-10 sm:py-28">
+      <section
+        id="tracks"
+        className="scroll-mt-16 bg-[#4a90e2] px-6 py-20 text-black sm:px-10 sm:py-28"
+      >
         <div className="mx-auto max-w-[1120px]">
           <p className="text-[13px] font-semibold tracking-[0.14em] uppercase opacity-70">
             Heavy rotation
@@ -285,7 +300,10 @@ export function Dashboard({ initial }: { initial: StatsPayload }) {
         </div>
       </section>
 
-      <section className="bg-[#ff6437] px-6 py-20 text-black sm:px-10 sm:py-28">
+      <section
+        id="always-on"
+        className="scroll-mt-16 bg-[#ff6437] px-6 py-20 text-black sm:px-10 sm:py-28"
+      >
         <div className="mx-auto max-w-[1120px]">
           <p className="text-[13px] font-semibold tracking-[0.14em] uppercase opacity-70">
             Not a one-month fling
@@ -321,7 +339,10 @@ export function Dashboard({ initial }: { initial: StatsPayload }) {
         </div>
       </section>
 
-      <section className="bg-[#121212] px-6 py-20 sm:px-10 sm:py-28">
+      <section
+        id="habits"
+        className="scroll-mt-16 bg-[#121212] px-6 py-20 sm:px-10 sm:py-28"
+      >
         <div className="mx-auto max-w-[1120px]">
           <p className="text-[13px] font-medium tracking-[0.14em] text-[#1ed760] uppercase">
             Habits
@@ -342,7 +363,10 @@ export function Dashboard({ initial }: { initial: StatsPayload }) {
         </div>
       </section>
 
-      <section className="border-t border-white/10 bg-black px-6 py-20 sm:px-10 sm:py-28">
+      <section
+        id="sessions"
+        className="scroll-mt-16 border-t border-white/10 bg-black px-6 py-20 sm:px-10 sm:py-28"
+      >
         <div className="mx-auto max-w-[1120px]">
           <p className="text-[13px] font-medium tracking-[0.14em] text-[#1ed760] uppercase">
             Lately
@@ -381,7 +405,10 @@ export function Dashboard({ initial }: { initial: StatsPayload }) {
         </div>
       </section>
 
-      <section className="bg-[#1ed760] px-6 py-20 text-black sm:px-10 sm:py-28">
+      <section
+        id="repeats"
+        className="scroll-mt-16 bg-[#1ed760] px-6 py-20 text-black sm:px-10 sm:py-28"
+      >
         <div className="mx-auto max-w-[1120px]">
           <p className="text-[13px] font-semibold tracking-[0.14em] uppercase opacity-70">
             Can&apos;t skip it

@@ -97,7 +97,10 @@ export function RecommendSong() {
   }
 
   return (
-    <section className="bg-[#0a0a0a] px-6 py-20 text-white sm:px-10 sm:py-28">
+    <section
+      id="recommend"
+      className="scroll-mt-16 bg-[#0a0a0a] px-6 py-20 text-white sm:px-10 sm:py-28"
+    >
       <div className="mx-auto max-w-[1120px]">
         <p className="text-[13px] font-medium tracking-[0.14em] text-[#1ed760] uppercase">
           For recruiters & friends

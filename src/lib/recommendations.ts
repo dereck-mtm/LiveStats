@@ -1,4 +1,4 @@
-import { get, list, put } from "@vercel/blob";
+import { del, get, list, put } from "@vercel/blob";
 import { mkdir, readFile, writeFile } from "fs/promises";
 import { join } from "path";
 
@@ -81,4 +81,13 @@ export async function addRecommendation(
     allowOverwrite: true,
   });
   return item;
+}
+
+export async function deleteRecommendation(id: string) {
+  if (!hasBlob()) {
+    const items = (await readLocal()).filter((i) => i.id !== id);
+    await writeLocal(items);
+    return;
+  }
+  await del(`${BLOB_PREFIX}${id}.json`);
 }

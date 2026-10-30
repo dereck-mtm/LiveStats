@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import {
   addRecommendation,
   listRecommendations,
+  deleteRecommendation,
 } from "@/lib/recommendations";
 
 export const dynamic = "force-dynamic";
@@ -38,11 +39,25 @@ export async function POST(request: NextRequest) {
     trackId: String(body.trackId).slice(0, 64),
     trackName: String(body.trackName).slice(0, 120),
     artists: String(body.artists).slice(0, 160),
-    albumImage: body.albumImage ? String(body.albumImage).slice(0, 500) : undefined,
-    spotifyUrl: body.spotifyUrl ? String(body.spotifyUrl).slice(0, 300) : undefined,
+    albumImage: body.albumImage
+      ? String(body.albumImage).slice(0, 500)
+      : undefined,
+    spotifyUrl: body.spotifyUrl
+      ? String(body.spotifyUrl).slice(0, 300)
+      : undefined,
     fromName: String(body.fromName || "").slice(0, 40),
     note: String(body.note || "").slice(0, 160),
   });
 
   return NextResponse.json({ item }, { status: 201 });
+}
+
+/** Owner cleanup: DELETE /api/recommend?id=rec_xxx */
+export async function DELETE(request: NextRequest) {
+  const id = request.nextUrl.searchParams.get("id")?.trim();
+  if (!id || !/^rec_[\w-]+$/.test(id)) {
+    return NextResponse.json({ error: "Missing id" }, { status: 400 });
+  }
+  await deleteRecommendation(id);
+  return NextResponse.json({ ok: true });
 }
