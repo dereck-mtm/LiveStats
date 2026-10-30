@@ -7,7 +7,8 @@
     "build": "next build",
     "start": "next start --port 43127 --hostname 127.0.0.1",
     "lint": "eslint",
-    "sync:spotify": "node scripts/sync-spotify.mjs"
+    "sync:spotify": "node scripts/sync-spotify.mjs",
+    "smoke": "node scripts/smoke-test.mjs"
   },
   "dependencies": {
     "@vercel/blob": "^2.8.2",
